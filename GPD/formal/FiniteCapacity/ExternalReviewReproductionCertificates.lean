@@ -466,6 +466,104 @@ theorem errc004_canonical_artifact_environment_hash_closed :
   simp
 
 /--
+`ERRC-005` records compatibility with the frozen Paper 15 protocol interface.
+Compatibility is a finite reference relation only; it does not recover the
+protocol, assert prediction or falsification success, or assert review or
+reproduction success.
+-/
+structure ERRC005Paper15ProtocolCompatibilityContract where
+  finitePaper15EndpointReference : Prop
+  finitePaper15FinalCertificateReference : Prop
+  finitePaper15ProtocolLabelReference : Prop
+  finiteCertificateCompatibilityRelation : Prop
+  boundedPaper15EndpointReference : Prop
+  boundedPaper15FinalCertificateReference : Prop
+  boundedPaper15ProtocolLabelReference : Prop
+  boundedCertificateCompatibilityRelation : Prop
+  paper15EndpointFrozen : Prop
+  paper15FinalCertificateFrozen : Prop
+  compatibilityIsReferenceOnly : Prop
+  noCertificateRecoveryClaim : Prop
+  noProtocolRecoveryClaim : Prop
+  noReviewAcceptanceClaim : Prop
+  noReproductionSuccessClaim : Prop
+  noBenchmarkSuccessClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noSimulationOnlyPromotionClaim : Prop
+  noFitOnlyCalibrationClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def ERRC005Paper15ProtocolCompatibilityContract.closed
+    (c : ERRC005Paper15ProtocolCompatibilityContract) : Prop :=
+  c.finitePaper15EndpointReference ∧
+  c.finitePaper15FinalCertificateReference ∧
+  c.finitePaper15ProtocolLabelReference ∧
+  c.finiteCertificateCompatibilityRelation ∧
+  c.boundedPaper15EndpointReference ∧
+  c.boundedPaper15FinalCertificateReference ∧
+  c.boundedPaper15ProtocolLabelReference ∧
+  c.boundedCertificateCompatibilityRelation ∧
+  c.paper15EndpointFrozen ∧
+  c.paper15FinalCertificateFrozen ∧
+  c.compatibilityIsReferenceOnly ∧
+  c.noCertificateRecoveryClaim ∧
+  c.noProtocolRecoveryClaim ∧
+  c.noReviewAcceptanceClaim ∧
+  c.noReproductionSuccessClaim ∧
+  c.noBenchmarkSuccessClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noSimulationOnlyPromotionClaim ∧
+  c.noFitOnlyCalibrationClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+def errc005CanonicalPaper15ProtocolCompatibilityContract :
+    ERRC005Paper15ProtocolCompatibilityContract :=
+  {
+    finitePaper15EndpointReference := True,
+    finitePaper15FinalCertificateReference := True,
+    finitePaper15ProtocolLabelReference := True,
+    finiteCertificateCompatibilityRelation := True,
+    boundedPaper15EndpointReference := True,
+    boundedPaper15FinalCertificateReference := True,
+    boundedPaper15ProtocolLabelReference := True,
+    boundedCertificateCompatibilityRelation := True,
+    paper15EndpointFrozen := True,
+    paper15FinalCertificateFrozen := True,
+    compatibilityIsReferenceOnly := True,
+    noCertificateRecoveryClaim := True,
+    noProtocolRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalPromotionClaim := True,
+    noSimulationOnlyPromotionClaim := True,
+    noFitOnlyCalibrationClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem errc005_canonical_paper15_protocol_compatibility_closed :
+    ERRC005Paper15ProtocolCompatibilityContract.closed
+      errc005CanonicalPaper15ProtocolCompatibilityContract := by
+  unfold ERRC005Paper15ProtocolCompatibilityContract.closed
+  unfold errc005CanonicalPaper15ProtocolCompatibilityContract
+  simp
+
+/--
 The full Paper 16 theorem stays closed only after a future final conditional
 certificate. `ERRC-001` intentionally leaves that field false.
 -/
@@ -678,6 +776,58 @@ theorem paper16_errc004_stage_does_not_close_external_review_reproduction_certif
   unfold errc003CanonicalReviewerProtocolProvenanceContract
   unfold ERRC004ArtifactEnvironmentHashContract.closed
   unfold errc004CanonicalArtifactEnvironmentHashContract
+  simp
+
+def paper16ERRC005Paper15ProtocolCompatibilityContract :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract :=
+  {
+    errc001UpstreamBindingClosed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002FiniteCertificateRecordClosed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003ReviewerProtocolProvenanceClosed :=
+      ERRC003ReviewerProtocolProvenanceContract.closed
+        errc003CanonicalReviewerProtocolProvenanceContract,
+    errc004ReproductionArtifactEnvironmentClosed :=
+      ERRC004ArtifactEnvironmentHashContract.closed
+        errc004CanonicalArtifactEnvironmentHashContract,
+    errc005Paper15ProtocolCompatibilityClosed :=
+      ERRC005Paper15ProtocolCompatibilityContract.closed
+        errc005CanonicalPaper15ProtocolCompatibilityContract,
+    errc006StabilityAuditabilityClosed := False,
+    errc007NoHiddenPromotionValidationAcceptanceAuditClosed := False,
+    errc008FinalConditionalCertificateClosed := False,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem paper16_errc005_stage_does_not_close_external_review_reproduction_certificates_theorem :
+    ¬ Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+      paper16ERRC005Paper15ProtocolCompatibilityContract := by
+  unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+  unfold paper16ERRC005Paper15ProtocolCompatibilityContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
+  unfold ERRC004ArtifactEnvironmentHashContract.closed
+  unfold errc004CanonicalArtifactEnvironmentHashContract
+  unfold ERRC005Paper15ProtocolCompatibilityContract.closed
+  unfold errc005CanonicalPaper15ProtocolCompatibilityContract
   simp
 
 end FiniteCapacity

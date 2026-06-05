@@ -7,7 +7,8 @@ claim-boundary scaffold through the frozen Paper 15 result. `ERRC-002` is
 closed as a finite external review and reproduction certificate record
 interface. `ERRC-003` is closed as finite reviewer, protocol, and provenance
 descriptors. `ERRC-004` is closed as finite reproduction artifact,
-environment, and hash descriptors:
+environment, and hash descriptors. `ERRC-005` is closed as Paper 15 protocol
+compatibility without review acceptance or reproduction success:
 
 - Paper 15 commit:
   `b0fbcea9d936393586367e1ea9fb2586b4b4f7e3`
@@ -21,8 +22,8 @@ not closed.
 
 ## Active Obligation
 
-`ERRC-005`: Define Paper 15 protocol compatibility without review acceptance
-or reproduction success.
+`ERRC-006`: Define certificate stability, auditability, and reproducibility
+behavior.
 
 The descriptors must remain bounded, auditable, and non-promoting. They must not
 import continuum quantum field theory, external Hilbert bundles, matter fields,
@@ -38,6 +39,7 @@ or a unified field theory.
 - `ERRC-002`: Finite external review and reproduction certificate records.
 - `ERRC-003`: Finite reviewer, protocol, and provenance descriptors.
 - `ERRC-004`: Finite reproduction artifact, environment, and hash descriptors.
+- `ERRC-005`: Paper 15 protocol compatibility without success imports.
 
 ## Claim Boundary
 

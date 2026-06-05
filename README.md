@@ -45,8 +45,9 @@ upstream binding and claim boundary through the closed Paper 15 result.
 as bounded, auditable, non-promoting interface rows. `ERRC-003` defines finite
 reviewer, protocol, and provenance descriptors. `ERRC-004` defines finite
 reproduction artifact, environment, and hash descriptors. `ERRC-005` is the
-active next obligation: define Paper 15 protocol compatibility as a bounded,
-auditable, non-promoting reference relation.
+Paper 15 protocol compatibility reference relation. `ERRC-006` is the active
+next obligation: define certificate stability, auditability, and
+reproducibility behavior.
 
 This does not prove certificate recovery, review acceptance, reproduction
 success, protocol recovery, benchmark success, prediction success,

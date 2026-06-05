@@ -9,18 +9,18 @@
   bounded, auditable, non-promoting interface rows.
 - `ERRC-003`: Finite reviewer, protocol, and provenance descriptors.
 - `ERRC-004`: Finite reproduction artifact, environment, and hash descriptors.
+- `ERRC-005`: Paper 15 protocol compatibility without review acceptance,
+  reproduction success, protocol recovery, prediction success, or
+  falsification success.
 
 ## Active
 
-- `ERRC-005`: Define compatibility with Paper 15 protocol rows without
-  claiming review acceptance, reproduction success, protocol recovery,
-  prediction success, falsification success, physical validation, or physical
-  promotion.
+- `ERRC-006`: Define certificate stability, auditability, and reproducibility
+  behavior without claiming reproduction success, empirical adequacy, physical
+  validation, or physical promotion.
 
 ## Planned
 
-- `ERRC-006`: Define certificate stability, auditability, and reproducibility
-  behavior.
 - `ERRC-007`: Audit for hidden physical-promotion, validation, review
   acceptance, or reproduction-success imports.
 - `ERRC-008`: Assemble the final conditional external review and reproduction

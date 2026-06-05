@@ -14,4 +14,6 @@
   descriptors as bounded, auditable, non-promoting interface components.
 - Closed `ERRC-004` by defining finite reproduction artifact, environment, and
   hash descriptors as audit-only, non-promoting interface components.
-- Recorded `ERRC-005` as the active next obligation.
+- Closed `ERRC-005` by defining Paper 15 protocol compatibility as a finite
+  reference relation without success or acceptance imports.
+- Recorded `ERRC-006` as the active next obligation.
