@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper": 16,
+  "title": "External Review And Reproduction Certificates From Finite-Capacity Causal Networks",
+  "artifacts": [
+    "external_review_reproduction_certificates_theorem.tex",
+    "PAPER-CONFIG.json",
+    "reproducibility-manifest.json"
+  ],
+  "claim_boundary": {
+    "certificate_recovery_claim": false,
+    "review_acceptance_claim": false,
+    "reproduction_success_claim": false,
+    "physical_promotion_claim": false,
+    "physical_validation_claim": false,
+    "empirical_adequacy_claim": false,
+    "physical_nature_claim": false,
+    "unified_field_theory_claim": false
+  }
+}

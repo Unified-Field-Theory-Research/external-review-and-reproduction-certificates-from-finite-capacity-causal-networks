@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "paper": 16,
+  "phase": 1,
+  "phase_name": "Upstream Binding And Claim Boundary",
+  "active_obligation": "ERRC-002",
+  "closed_obligations": [
+    "ERRC-001"
+  ],
+  "upstream_frozen_through_paper15": true,
+  "paper15_frozen_commit": "b0fbcea9d936393586367e1ea9fb2586b4b4f7e3",
+  "paper15_formal_endpoint": "Paper15PredictionFalsificationProtocolsTheoremContract.closed",
+  "paper15_canonical_proof": "paper15_pfp008_final_conditional_certificate_closes_prediction_falsification_protocols_theorem",
+  "paper16_claims": {
+    "errc001_upstream_binding_closed": true,
+    "external_review_reproduction_certificates_theorem_closed": false,
+    "certificate_recovery_claim": false,
+    "review_acceptance_claim": false,
+    "reproduction_success_claim": false,
+    "protocol_recovery_claim": false,
+    "benchmark_success_claim": false,
+    "prediction_success_claim": false,
+    "falsification_success_claim": false,
+    "physical_promotion_claim": false,
+    "physical_validation_claim": false,
+    "empirical_adequacy_claim": false,
+    "observed_particle_catalog_recovery_claim": false,
+    "physical_standard_model_claim": false,
+    "physical_particle_excitation_claim": false,
+    "physical_matter_field_claim": false,
+    "physical_gauge_field_claim": false,
+    "physical_quantum_dynamics_claim": false,
+    "continuum_quantum_field_theory_claim": false,
+    "simulation_only_promotion": false,
+    "fit_only_calibration_claim": false,
+    "physical_nature_claim": false,
+    "unified_field_theory_claim": false
+  },
+  "next_move": "ERRC-002: define finite external review and reproduction certificate records as bounded, auditable, non-promoting interface rows."
+}

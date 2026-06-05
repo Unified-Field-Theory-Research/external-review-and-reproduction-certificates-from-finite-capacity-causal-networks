@@ -1,0 +1,10 @@
+target/
+.lake/
+lake-packages/
+*.olean
+*.ilean
+*.trace
+*.aux
+*.log
+*.out
+*.pdf

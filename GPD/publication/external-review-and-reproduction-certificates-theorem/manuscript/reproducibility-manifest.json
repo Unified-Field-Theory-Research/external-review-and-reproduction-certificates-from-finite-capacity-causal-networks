@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "paper": 16,
+  "checks": [
+    "make test-fast",
+    "make lean-build"
+  ],
+  "formal_module": "FiniteCapacity.ExternalReviewReproductionCertificates",
+  "rust_test": "rust/cclab_accel/tests/external_review_reproduction_certificates.rs",
+  "non_promotion_boundary_required": true
+}
