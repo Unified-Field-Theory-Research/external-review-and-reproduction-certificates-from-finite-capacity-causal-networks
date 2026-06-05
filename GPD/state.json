@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "paper": 16,
-  "phase": 1,
-  "phase_name": "Upstream Binding And Claim Boundary",
-  "active_obligation": "ERRC-002",
+  "phase": 2,
+  "phase_name": "Finite Certificate Record Interface",
+  "active_obligation": "ERRC-003",
   "closed_obligations": [
-    "ERRC-001"
+    "ERRC-001",
+    "ERRC-002"
   ],
   "upstream_frozen_through_paper15": true,
   "paper15_frozen_commit": "b0fbcea9d936393586367e1ea9fb2586b4b4f7e3",
@@ -13,6 +14,7 @@
   "paper15_canonical_proof": "paper15_pfp008_final_conditional_certificate_closes_prediction_falsification_protocols_theorem",
   "paper16_claims": {
     "errc001_upstream_binding_closed": true,
+    "errc002_finite_certificate_record_closed": true,
     "external_review_reproduction_certificates_theorem_closed": false,
     "certificate_recovery_claim": false,
     "review_acceptance_claim": false,
@@ -36,5 +38,5 @@
     "physical_nature_claim": false,
     "unified_field_theory_claim": false
   },
-  "next_move": "ERRC-002: define finite external review and reproduction certificate records as bounded, auditable, non-promoting interface rows."
+  "next_move": "ERRC-003: define finite reviewer, protocol, and provenance descriptors without importing review acceptance, reproduction success, validation, or promotion."
 }

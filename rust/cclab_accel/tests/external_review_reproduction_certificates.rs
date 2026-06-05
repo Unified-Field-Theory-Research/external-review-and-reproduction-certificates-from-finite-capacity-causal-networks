@@ -2,8 +2,9 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use cclab_accel::{
-    active_obligation, paper16_skeleton_marker, ERRC001UpstreamBinding, Paper16SkeletonCertificate,
-    PAPER15_FINAL_CERTIFICATE, PAPER15_FORMAL_ENDPOINT, PAPER15_FROZEN_COMMIT,
+    active_obligation, paper16_errc002_marker, paper16_skeleton_marker, ERRC001UpstreamBinding,
+    ERRC002CertificateRecord, Paper16SkeletonCertificate, PAPER15_FINAL_CERTIFICATE,
+    PAPER15_FORMAL_ENDPOINT, PAPER15_FROZEN_COMMIT,
 };
 
 fn repo_root() -> PathBuf {
@@ -61,6 +62,43 @@ fn initial_skeleton_keeps_paper16_theorem_open() {
 }
 
 #[test]
+fn errc002_defines_finite_nonpromoting_certificate_records() {
+    let record = ERRC002CertificateRecord::canonical();
+    assert!(record.closes_errc002());
+    assert!(record.certificate_identifier.is_finite_bounded_label());
+    assert!(record.reviewer_label.is_finite_bounded_label());
+    assert!(record.protocol_label.is_finite_bounded_label());
+    assert!(record.artifact_label.is_finite_bounded_label());
+    assert!(record.environment_descriptor.is_finite_bounded_label());
+    assert!(record.reproduction_status.avoids_success_claim());
+    assert_eq!(
+        record.paper15_protocol_reference.value,
+        PAPER15_FORMAL_ENDPOINT
+    );
+    assert!(record.paper15_protocol_compatibility_referenced_only);
+    assert!(record.no_review_acceptance_claim);
+    assert!(record.no_reproduction_success_claim);
+    assert!(record.no_physical_promotion_claim);
+    assert!(record.no_physical_validation_claim);
+    assert!(record.no_unified_field_theory_claim);
+    assert_eq!(
+        paper16_errc002_marker(),
+        "paper16-external-review-reproduction-certificates-errc002-finite-records"
+    );
+}
+
+#[test]
+fn errc002_stage_keeps_later_rungs_open() {
+    let record = ERRC002CertificateRecord::canonical();
+    let certificate = Paper16SkeletonCertificate::from_errc002_record(&record);
+    assert!(certificate.errc001_upstream_binding_closed);
+    assert!(certificate.errc002_finite_certificate_record_closed);
+    assert!(!certificate.errc003_reviewer_protocol_provenance_closed);
+    assert!(!certificate.errc008_final_conditional_certificate_closed);
+    assert!(!certificate.closes_paper16_theorem());
+}
+
+#[test]
 fn upstream_json_records_paper15_certificate_and_nonpromotion() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER15_FROZEN_COMMIT));
@@ -75,13 +113,14 @@ fn upstream_json_records_paper15_certificate_and_nonpromotion() {
 }
 
 #[test]
-fn docs_keep_errc002_active_and_success_claims_false() {
+fn docs_keep_errc003_active_and_success_claims_false() {
     let state = read_repo_file("GPD/state.json");
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/external_review_reproduction_certificates_theorem.md");
 
-    assert_eq!(active_obligation(), "ERRC-002");
-    assert!(state.contains("\"active_obligation\": \"ERRC-002\""));
+    assert_eq!(active_obligation(), "ERRC-003");
+    assert!(state.contains("\"active_obligation\": \"ERRC-003\""));
+    assert!(state.contains("\"errc002_finite_certificate_record_closed\": true"));
     assert!(state.contains("\"external_review_reproduction_certificates_theorem_closed\": false"));
     assert!(state.contains("\"certificate_recovery_claim\": false"));
     assert!(state.contains("\"review_acceptance_claim\": false"));
@@ -93,6 +132,7 @@ fn docs_keep_errc002_active_and_success_claims_false() {
     assert!(state_md
         .contains("The local Paper 16 external review and reproduction certificates theorem is"));
     assert!(theorem.contains("ERRC-002"));
+    assert!(theorem.contains("ERRC-003"));
     assert!(theorem.contains("no unified field theory claim"));
 }
 

@@ -41,9 +41,9 @@ This repo is intentionally separate from the upstream theorem repositories:
 
 The current theorem package is open and non-promoting. `ERRC-001` records the
 upstream binding and claim boundary through the closed Paper 15 result.
-`ERRC-002` is the active next obligation: define finite external review and
-reproduction certificate records as bounded, auditable, non-promoting
-interface rows.
+`ERRC-002` defines finite external review and reproduction certificate records
+as bounded, auditable, non-promoting interface rows. `ERRC-003` is the active
+next obligation: define finite reviewer, protocol, and provenance descriptors.
 
 This does not prove certificate recovery, review acceptance, reproduction
 success, protocol recovery, benchmark success, prediction success,

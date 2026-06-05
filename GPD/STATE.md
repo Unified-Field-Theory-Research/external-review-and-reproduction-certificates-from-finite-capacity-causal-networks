@@ -3,7 +3,9 @@
 ## Current Status
 
 Paper 16 is open. `ERRC-001` is closed as an upstream-binding and
-claim-boundary scaffold through the frozen Paper 15 result:
+claim-boundary scaffold through the frozen Paper 15 result. `ERRC-002` is
+closed as a finite external review and reproduction certificate record
+interface:
 
 - Paper 15 commit:
   `b0fbcea9d936393586367e1ea9fb2586b4b4f7e3`
@@ -17,10 +19,9 @@ not closed.
 
 ## Active Obligation
 
-`ERRC-002`: Define finite external review and reproduction certificate
-records.
+`ERRC-003`: Define finite reviewer, protocol, and provenance descriptors.
 
-The record must remain bounded, auditable, and non-promoting. It must not
+The descriptors must remain bounded, auditable, and non-promoting. They must not
 import continuum quantum field theory, external Hilbert bundles, matter fields,
 gauge fields, physical particle excitations, physical Standard Model content,
 physical validation, empirical adequacy, benchmark success, prediction
@@ -31,6 +32,7 @@ or a unified field theory.
 ## Closed Obligations
 
 - `ERRC-001`: Upstream binding and claim-boundary scaffold.
+- `ERRC-002`: Finite external review and reproduction certificate records.
 
 ## Claim Boundary
 

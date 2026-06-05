@@ -5,11 +5,12 @@ finite-capacity causal networks.
 
 The repository begins with `ERRC-001` closed: upstream binding and
 claim-boundary preservation through the frozen Paper 15 prediction and
-falsification protocols certificate.
+falsification protocols certificate. `ERRC-002` is also closed as a finite
+external review and reproduction certificate record interface.
 
-The local theorem is not closed. The active next obligation is `ERRC-002`:
-define finite external review and reproduction certificate records as bounded,
-auditable, non-promoting interface rows.
+The local theorem is not closed. The active next obligation is `ERRC-003`:
+define finite reviewer, protocol, and provenance descriptors as bounded,
+auditable, non-promoting interface components.
 
 ## Claim Boundary
 

@@ -21,6 +21,84 @@ pub const PAPER15_FINAL_CERTIFICATE: &str =
 
 pub const PAPER16_SKELETON_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc001-nonpromoting-skeleton";
+pub const PAPER16_ERRC002_MARKER: &str =
+    "paper16-external-review-reproduction-certificates-errc002-finite-records";
+
+pub const CERTIFICATE_IDENTIFIER_MAX_BYTES: usize = 64;
+pub const REVIEWER_LABEL_MAX_BYTES: usize = 64;
+pub const PROTOCOL_LABEL_MAX_BYTES: usize = 96;
+pub const ARTIFACT_LABEL_MAX_BYTES: usize = 96;
+pub const ENVIRONMENT_DESCRIPTOR_MAX_BYTES: usize = 160;
+pub const PAPER15_PROTOCOL_REFERENCE_MAX_BYTES: usize = 128;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct BoundedCertificateText {
+    pub value: &'static str,
+    pub max_bytes: usize,
+}
+
+impl BoundedCertificateText {
+    pub const fn new(value: &'static str, max_bytes: usize) -> Self {
+        Self { value, max_bytes }
+    }
+
+    pub fn is_finite_bounded_label(&self) -> bool {
+        !self.value.is_empty()
+            && self.value.len() <= self.max_bytes
+            && self.value.is_ascii()
+            && !self.value.bytes().any(|byte| byte.is_ascii_control())
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ReproductionStatusDescriptor {
+    NotAttempted,
+    ExternalAttemptPending,
+    AttemptLoggedWithoutSuccessClaim,
+    Inconclusive,
+}
+
+impl ReproductionStatusDescriptor {
+    pub const fn is_finite_descriptor(self) -> bool {
+        matches!(
+            self,
+            Self::NotAttempted
+                | Self::ExternalAttemptPending
+                | Self::AttemptLoggedWithoutSuccessClaim
+                | Self::Inconclusive
+        )
+    }
+
+    pub const fn avoids_success_claim(self) -> bool {
+        matches!(
+            self,
+            Self::NotAttempted
+                | Self::ExternalAttemptPending
+                | Self::AttemptLoggedWithoutSuccessClaim
+                | Self::Inconclusive
+        )
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum AuditStatusDescriptor {
+    BoundaryChecked,
+    HashesRecorded,
+    NonPromotionChecked,
+    OpenIssueLogged,
+}
+
+impl AuditStatusDescriptor {
+    pub const fn is_finite_descriptor(self) -> bool {
+        matches!(
+            self,
+            Self::BoundaryChecked
+                | Self::HashesRecorded
+                | Self::NonPromotionChecked
+                | Self::OpenIssueLogged
+        )
+    }
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct UpstreamPaper {
@@ -227,6 +305,120 @@ impl ERRC001UpstreamBinding {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ERRC002CertificateRecord {
+    pub certificate_identifier: BoundedCertificateText,
+    pub reviewer_label: BoundedCertificateText,
+    pub protocol_label: BoundedCertificateText,
+    pub artifact_label: BoundedCertificateText,
+    pub environment_descriptor: BoundedCertificateText,
+    pub reproduction_status: ReproductionStatusDescriptor,
+    pub audit_status: AuditStatusDescriptor,
+    pub paper15_protocol_reference: BoundedCertificateText,
+    pub paper15_protocol_compatibility_referenced_only: bool,
+    pub no_certificate_recovery_claim: bool,
+    pub no_review_acceptance_claim: bool,
+    pub no_reproduction_success_claim: bool,
+    pub no_benchmark_success_claim: bool,
+    pub no_prediction_success_claim: bool,
+    pub no_falsification_success_claim: bool,
+    pub no_physical_promotion_claim: bool,
+    pub no_physical_validation_claim: bool,
+    pub no_empirical_adequacy_claim: bool,
+    pub no_observed_catalog_recovery_claim: bool,
+    pub no_simulation_only_promotion: bool,
+    pub no_fit_only_calibration_claim: bool,
+    pub no_physical_nature_claim: bool,
+    pub no_unified_field_theory_claim: bool,
+    pub claim_boundary: Paper16ClaimBoundary,
+}
+
+impl ERRC002CertificateRecord {
+    pub const fn canonical() -> Self {
+        Self {
+            certificate_identifier: BoundedCertificateText::new(
+                "ERRC-002-certificate-row",
+                CERTIFICATE_IDENTIFIER_MAX_BYTES,
+            ),
+            reviewer_label: BoundedCertificateText::new(
+                "finite-reviewer-label",
+                REVIEWER_LABEL_MAX_BYTES,
+            ),
+            protocol_label: BoundedCertificateText::new(
+                "paper15-compatible-review-protocol-label",
+                PROTOCOL_LABEL_MAX_BYTES,
+            ),
+            artifact_label: BoundedCertificateText::new(
+                "finite-review-artifact-label",
+                ARTIFACT_LABEL_MAX_BYTES,
+            ),
+            environment_descriptor: BoundedCertificateText::new(
+                "bounded-reproduction-environment-descriptor",
+                ENVIRONMENT_DESCRIPTOR_MAX_BYTES,
+            ),
+            reproduction_status: ReproductionStatusDescriptor::AttemptLoggedWithoutSuccessClaim,
+            audit_status: AuditStatusDescriptor::NonPromotionChecked,
+            paper15_protocol_reference: BoundedCertificateText::new(
+                PAPER15_FORMAL_ENDPOINT,
+                PAPER15_PROTOCOL_REFERENCE_MAX_BYTES,
+            ),
+            paper15_protocol_compatibility_referenced_only: true,
+            no_certificate_recovery_claim: true,
+            no_review_acceptance_claim: true,
+            no_reproduction_success_claim: true,
+            no_benchmark_success_claim: true,
+            no_prediction_success_claim: true,
+            no_falsification_success_claim: true,
+            no_physical_promotion_claim: true,
+            no_physical_validation_claim: true,
+            no_empirical_adequacy_claim: true,
+            no_observed_catalog_recovery_claim: true,
+            no_simulation_only_promotion: true,
+            no_fit_only_calibration_claim: true,
+            no_physical_nature_claim: true,
+            no_unified_field_theory_claim: true,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_errc002(&self) -> bool {
+        self.certificate_identifier.is_finite_bounded_label()
+            && self.certificate_identifier.max_bytes == CERTIFICATE_IDENTIFIER_MAX_BYTES
+            && self.reviewer_label.is_finite_bounded_label()
+            && self.reviewer_label.max_bytes == REVIEWER_LABEL_MAX_BYTES
+            && self.protocol_label.is_finite_bounded_label()
+            && self.protocol_label.max_bytes == PROTOCOL_LABEL_MAX_BYTES
+            && self.artifact_label.is_finite_bounded_label()
+            && self.artifact_label.max_bytes == ARTIFACT_LABEL_MAX_BYTES
+            && self.environment_descriptor.is_finite_bounded_label()
+            && self.environment_descriptor.max_bytes == ENVIRONMENT_DESCRIPTOR_MAX_BYTES
+            && self.reproduction_status.is_finite_descriptor()
+            && self.reproduction_status.avoids_success_claim()
+            && self.audit_status.is_finite_descriptor()
+            && self.paper15_protocol_reference.is_finite_bounded_label()
+            && self.paper15_protocol_reference.max_bytes == PAPER15_PROTOCOL_REFERENCE_MAX_BYTES
+            && self.paper15_protocol_reference.value == PAPER15_FORMAL_ENDPOINT
+            && self.paper15_protocol_compatibility_referenced_only
+            && self.no_certificate_recovery_claim
+            && self.no_review_acceptance_claim
+            && self.no_reproduction_success_claim
+            && self.no_benchmark_success_claim
+            && self.no_prediction_success_claim
+            && self.no_falsification_success_claim
+            && self.no_physical_promotion_claim
+            && self.no_physical_validation_claim
+            && self.no_empirical_adequacy_claim
+            && self.no_observed_catalog_recovery_claim
+            && self.no_simulation_only_promotion
+            && self.no_fit_only_calibration_claim
+            && self.no_physical_nature_claim
+            && self.no_unified_field_theory_claim
+            && self
+                .claim_boundary
+                .all_physical_review_and_success_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper16SkeletonCertificate {
     pub errc001_upstream_binding_closed: bool,
     pub errc002_finite_certificate_record_closed: bool,
@@ -244,6 +436,20 @@ impl Paper16SkeletonCertificate {
         Self {
             errc001_upstream_binding_closed: true,
             errc002_finite_certificate_record_closed: false,
+            errc003_reviewer_protocol_provenance_closed: false,
+            errc004_reproduction_artifact_environment_closed: false,
+            errc005_paper15_protocol_compatibility_closed: false,
+            errc006_stability_auditability_closed: false,
+            errc007_no_hidden_promotion_validation_acceptance_audit_closed: false,
+            errc008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn from_errc002_record(record: &ERRC002CertificateRecord) -> Self {
+        Self {
+            errc001_upstream_binding_closed: ERRC001UpstreamBinding::canonical().closes_errc001(),
+            errc002_finite_certificate_record_closed: record.closes_errc002(),
             errc003_reviewer_protocol_provenance_closed: false,
             errc004_reproduction_artifact_environment_closed: false,
             errc005_paper15_protocol_compatibility_closed: false,
@@ -273,10 +479,14 @@ pub fn paper16_skeleton_marker() -> &'static str {
     PAPER16_SKELETON_MARKER
 }
 
+pub fn paper16_errc002_marker() -> &'static str {
+    PAPER16_ERRC002_MARKER
+}
+
 pub fn is_sha1_hex(value: &str) -> bool {
     value.len() == 40 && value.bytes().all(|byte| byte.is_ascii_hexdigit())
 }
 
 pub fn active_obligation() -> &'static str {
-    "ERRC-002"
+    "ERRC-003"
 }

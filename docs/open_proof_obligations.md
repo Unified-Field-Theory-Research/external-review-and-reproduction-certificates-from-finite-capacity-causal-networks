@@ -2,27 +2,24 @@
 
 ## Active
 
-### ERRC-002
+### ERRC-003
 
-Define finite external review and reproduction certificate records as bounded,
-auditable, non-promoting interface rows.
+Define finite reviewer, protocol, and provenance descriptors for the
+certificate rows as bounded, auditable, non-promoting interface components.
 
 Acceptance criteria:
 
-- the record schema is finite and explicit
-- certificate identifiers, reviewer labels, protocol labels, artifact labels,
-  environment descriptors, reproduction-status descriptors, and audit-status
-  descriptors are bounded
-- every row carries non-promotion, non-validation, and no-success flags
-- Paper 15 protocol compatibility is only referenced, not promoted
-- Rust guards reject certificate recovery, review acceptance, reproduction
-  success, benchmark success, prediction success, falsification success,
-  physical validation, empirical adequacy, observed-catalog recovery,
-  simulation-only promotion, fit-only calibration, physical nature realization,
-  and unified-field promotion
-- Lean scaffold records that `ERRC-002` is required before the full Paper 16
+- reviewer labels are finite descriptors, not review acceptance evidence
+- protocol labels are finite descriptors, not protocol recovery claims
+- provenance labels are finite descriptors with bounded source, timestamp, and
+  custodian fields
+- every descriptor keeps review acceptance, reproduction success, validation,
+  empirical adequacy, physical promotion, and unified-field claims false
+- Rust guards reject unbounded reviewer, protocol, and provenance descriptors
+- Lean scaffold records that `ERRC-003` is required before the full Paper 16
   theorem can close
 
 ## Closed
 
 - `ERRC-001`: Upstream binding and claim-boundary scaffold.
+- `ERRC-002`: Finite external review and reproduction certificate records.

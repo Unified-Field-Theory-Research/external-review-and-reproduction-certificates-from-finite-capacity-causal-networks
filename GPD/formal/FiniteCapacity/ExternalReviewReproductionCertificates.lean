@@ -153,6 +153,115 @@ theorem errc001_canonical_upstream_binding_closed :
   simp
 
 /--
+`ERRC-002` defines the finite certificate row shape. The row is only an
+interface contract: it records bounded labels and non-promotion guards, not
+external acceptance, reproduction success, validation, or recovery.
+-/
+structure ERRC002FiniteCertificateRecordContract where
+  finiteCertificateIdentifier : Prop
+  finiteReviewerLabel : Prop
+  finiteProtocolLabel : Prop
+  finiteArtifactLabel : Prop
+  finiteEnvironmentDescriptor : Prop
+  finiteReproductionStatusDescriptor : Prop
+  finiteAuditStatusDescriptor : Prop
+  boundedCertificateIdentifier : Prop
+  boundedReviewerLabel : Prop
+  boundedProtocolLabel : Prop
+  boundedArtifactLabel : Prop
+  boundedEnvironmentDescriptor : Prop
+  boundedReproductionStatusDescriptor : Prop
+  boundedAuditStatusDescriptor : Prop
+  paper15ProtocolCompatibilityReferencedOnly : Prop
+  noCertificateRecoveryClaim : Prop
+  noReviewAcceptanceClaim : Prop
+  noReproductionSuccessClaim : Prop
+  noBenchmarkSuccessClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noObservedCatalogRecoveryClaim : Prop
+  noSimulationOnlyPromotionClaim : Prop
+  noFitOnlyCalibrationClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def ERRC002FiniteCertificateRecordContract.closed
+    (c : ERRC002FiniteCertificateRecordContract) : Prop :=
+  c.finiteCertificateIdentifier ∧
+  c.finiteReviewerLabel ∧
+  c.finiteProtocolLabel ∧
+  c.finiteArtifactLabel ∧
+  c.finiteEnvironmentDescriptor ∧
+  c.finiteReproductionStatusDescriptor ∧
+  c.finiteAuditStatusDescriptor ∧
+  c.boundedCertificateIdentifier ∧
+  c.boundedReviewerLabel ∧
+  c.boundedProtocolLabel ∧
+  c.boundedArtifactLabel ∧
+  c.boundedEnvironmentDescriptor ∧
+  c.boundedReproductionStatusDescriptor ∧
+  c.boundedAuditStatusDescriptor ∧
+  c.paper15ProtocolCompatibilityReferencedOnly ∧
+  c.noCertificateRecoveryClaim ∧
+  c.noReviewAcceptanceClaim ∧
+  c.noReproductionSuccessClaim ∧
+  c.noBenchmarkSuccessClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noObservedCatalogRecoveryClaim ∧
+  c.noSimulationOnlyPromotionClaim ∧
+  c.noFitOnlyCalibrationClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+def errc002CanonicalFiniteCertificateRecordContract :
+    ERRC002FiniteCertificateRecordContract :=
+  {
+    finiteCertificateIdentifier := True,
+    finiteReviewerLabel := True,
+    finiteProtocolLabel := True,
+    finiteArtifactLabel := True,
+    finiteEnvironmentDescriptor := True,
+    finiteReproductionStatusDescriptor := True,
+    finiteAuditStatusDescriptor := True,
+    boundedCertificateIdentifier := True,
+    boundedReviewerLabel := True,
+    boundedProtocolLabel := True,
+    boundedArtifactLabel := True,
+    boundedEnvironmentDescriptor := True,
+    boundedReproductionStatusDescriptor := True,
+    boundedAuditStatusDescriptor := True,
+    paper15ProtocolCompatibilityReferencedOnly := True,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noObservedCatalogRecoveryClaim := True,
+    noSimulationOnlyPromotionClaim := True,
+    noFitOnlyCalibrationClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem errc002_canonical_finite_certificate_record_closed :
+    ERRC002FiniteCertificateRecordContract.closed
+      errc002CanonicalFiniteCertificateRecordContract := by
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  simp
+
+/--
 The full Paper 16 theorem stays closed only after a future final conditional
 certificate. `ERRC-001` intentionally leaves that field false.
 -/
@@ -233,6 +342,46 @@ theorem paper16_errc001_skeleton_does_not_close_external_review_reproduction_cer
       paper16InitialERRC001SkeletonContract := by
   unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
   unfold paper16InitialERRC001SkeletonContract
+  simp
+
+def paper16ERRC002FiniteCertificateRecordContract :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract :=
+  {
+    errc001UpstreamBindingClosed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002FiniteCertificateRecordClosed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003ReviewerProtocolProvenanceClosed := False,
+    errc004ReproductionArtifactEnvironmentClosed := False,
+    errc005Paper15ProtocolCompatibilityClosed := False,
+    errc006StabilityAuditabilityClosed := False,
+    errc007NoHiddenPromotionValidationAcceptanceAuditClosed := False,
+    errc008FinalConditionalCertificateClosed := False,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem paper16_errc002_stage_does_not_close_external_review_reproduction_certificates_theorem :
+    ¬ Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+      paper16ERRC002FiniteCertificateRecordContract := by
+  unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+  unfold paper16ERRC002FiniteCertificateRecordContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
   simp
 
 end FiniteCapacity

@@ -8,4 +8,6 @@
   `paper15_pfp008_final_conditional_certificate_closes_prediction_falsification_protocols_theorem`.
 - Added fail-closed Rust and Lean guards showing the initial skeleton does not
   close the external review and reproduction certificates theorem.
-- Recorded `ERRC-002` as the active next obligation.
+- Closed `ERRC-002` by defining finite external review and reproduction
+  certificate records as bounded, auditable, non-promoting interface rows.
+- Recorded `ERRC-003` as the active next obligation.

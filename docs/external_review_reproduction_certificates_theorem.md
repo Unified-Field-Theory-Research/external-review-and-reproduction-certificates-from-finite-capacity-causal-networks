@@ -16,21 +16,19 @@ reproduction success, physical validation, or unified-field promotion.
 
 - `ERRC-001`: Upstream binding and claim-boundary scaffold through the frozen
   Paper 15 final conditional certificate.
+- `ERRC-002`: Finite external review and reproduction certificate records.
 
 ## Active Rung
 
-- `ERRC-002`: Define finite external review and reproduction certificate
-  records.
+- `ERRC-003`: Define finite reviewer, protocol, and provenance descriptors.
 
-Required boundary for `ERRC-002`:
+Required boundary for `ERRC-003`:
 
-- finite certificate identifiers
 - finite reviewer labels
 - finite protocol labels
-- finite artifact labels
-- finite environment descriptors
-- finite reproduction-status descriptors
-- finite audit-status descriptors
+- finite provenance source labels
+- finite provenance timestamp labels
+- finite provenance custodian labels
 - no certificate recovery claim
 - no review acceptance claim
 - no reproduction success claim
@@ -44,7 +42,6 @@ Required boundary for `ERRC-002`:
 
 ## Planned Rungs
 
-- `ERRC-003`: finite reviewer, protocol, and provenance descriptors
 - `ERRC-004`: finite reproduction artifact, environment, and hash descriptors
 - `ERRC-005`: Paper 15 protocol compatibility without review acceptance or
   reproduction success
