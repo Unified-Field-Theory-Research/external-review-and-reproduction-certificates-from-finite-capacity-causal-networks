@@ -31,6 +31,8 @@ pub const PAPER16_ERRC005_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc005-paper15-compatibility";
 pub const PAPER16_ERRC006_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc006-stability-auditability";
+pub const PAPER16_ERRC007_MARKER: &str =
+    "paper16-external-review-reproduction-certificates-errc007-no-hidden-claim-imports";
 
 pub const CERTIFICATE_IDENTIFIER_MAX_BYTES: usize = 64;
 pub const REVIEWER_LABEL_MAX_BYTES: usize = 64;
@@ -46,6 +48,7 @@ pub const PAPER15_CERTIFICATE_REFERENCE_MAX_BYTES: usize = 128;
 pub const COMPATIBILITY_RELATION_MAX_BYTES: usize = 128;
 pub const AUDIT_SNAPSHOT_LABEL_MAX_BYTES: usize = 96;
 pub const RECHECK_PROCEDURE_LABEL_MAX_BYTES: usize = 128;
+pub const HIDDEN_CLAIM_AUDIT_LABEL_MAX_BYTES: usize = 128;
 pub const PROVENANCE_SOURCE_MAX_BYTES: usize = 96;
 pub const PROVENANCE_TIMESTAMP_MAX_BYTES: usize = 32;
 pub const PROVENANCE_CUSTODIAN_MAX_BYTES: usize = 96;
@@ -863,6 +866,110 @@ impl ERRC006StabilityAuditability {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ERRC007NoHiddenClaimAudit {
+    pub audit_label: BoundedCertificateText,
+    pub prior_rungs_remain_non_promoting: bool,
+    pub rejects_certificate_recovery_import: bool,
+    pub rejects_protocol_recovery_import: bool,
+    pub rejects_review_acceptance_import: bool,
+    pub rejects_reproduction_success_import: bool,
+    pub rejects_benchmark_success_import: bool,
+    pub rejects_prediction_success_import: bool,
+    pub rejects_falsification_success_import: bool,
+    pub rejects_physical_promotion_import: bool,
+    pub rejects_physical_validation_import: bool,
+    pub rejects_empirical_adequacy_import: bool,
+    pub rejects_observed_catalog_recovery_import: bool,
+    pub rejects_physical_standard_model_import: bool,
+    pub rejects_physical_particle_excitation_import: bool,
+    pub rejects_physical_matter_field_import: bool,
+    pub rejects_physical_gauge_field_import: bool,
+    pub rejects_physical_quantum_dynamics_import: bool,
+    pub rejects_continuum_quantum_field_theory_import: bool,
+    pub rejects_simulation_only_promotion_import: bool,
+    pub rejects_fit_only_calibration_import: bool,
+    pub rejects_physical_nature_import: bool,
+    pub rejects_unified_field_theory_import: bool,
+    pub claim_boundary: Paper16ClaimBoundary,
+}
+
+impl ERRC007NoHiddenClaimAudit {
+    pub const fn canonical() -> Self {
+        Self {
+            audit_label: BoundedCertificateText::new(
+                "no-hidden-promotion-validation-success-import-audit",
+                HIDDEN_CLAIM_AUDIT_LABEL_MAX_BYTES,
+            ),
+            prior_rungs_remain_non_promoting: true,
+            rejects_certificate_recovery_import: true,
+            rejects_protocol_recovery_import: true,
+            rejects_review_acceptance_import: true,
+            rejects_reproduction_success_import: true,
+            rejects_benchmark_success_import: true,
+            rejects_prediction_success_import: true,
+            rejects_falsification_success_import: true,
+            rejects_physical_promotion_import: true,
+            rejects_physical_validation_import: true,
+            rejects_empirical_adequacy_import: true,
+            rejects_observed_catalog_recovery_import: true,
+            rejects_physical_standard_model_import: true,
+            rejects_physical_particle_excitation_import: true,
+            rejects_physical_matter_field_import: true,
+            rejects_physical_gauge_field_import: true,
+            rejects_physical_quantum_dynamics_import: true,
+            rejects_continuum_quantum_field_theory_import: true,
+            rejects_simulation_only_promotion_import: true,
+            rejects_fit_only_calibration_import: true,
+            rejects_physical_nature_import: true,
+            rejects_unified_field_theory_import: true,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_errc007(
+        &self,
+        record: &ERRC002CertificateRecord,
+        descriptors: &ERRC003ReviewerProtocolProvenance,
+        artifacts: &ERRC004ArtifactEnvironmentHashes,
+        compatibility: &ERRC005Paper15Compatibility,
+        stability: &ERRC006StabilityAuditability,
+    ) -> bool {
+        self.audit_label.is_finite_bounded_label()
+            && self.audit_label.max_bytes == HIDDEN_CLAIM_AUDIT_LABEL_MAX_BYTES
+            && record.closes_errc002()
+            && descriptors.closes_errc003()
+            && artifacts.closes_errc004()
+            && compatibility.closes_errc005(record)
+            && stability.closes_errc006(record, descriptors, artifacts, compatibility)
+            && self.prior_rungs_remain_non_promoting
+            && self.rejects_certificate_recovery_import
+            && self.rejects_protocol_recovery_import
+            && self.rejects_review_acceptance_import
+            && self.rejects_reproduction_success_import
+            && self.rejects_benchmark_success_import
+            && self.rejects_prediction_success_import
+            && self.rejects_falsification_success_import
+            && self.rejects_physical_promotion_import
+            && self.rejects_physical_validation_import
+            && self.rejects_empirical_adequacy_import
+            && self.rejects_observed_catalog_recovery_import
+            && self.rejects_physical_standard_model_import
+            && self.rejects_physical_particle_excitation_import
+            && self.rejects_physical_matter_field_import
+            && self.rejects_physical_gauge_field_import
+            && self.rejects_physical_quantum_dynamics_import
+            && self.rejects_continuum_quantum_field_theory_import
+            && self.rejects_simulation_only_promotion_import
+            && self.rejects_fit_only_calibration_import
+            && self.rejects_physical_nature_import
+            && self.rejects_unified_field_theory_import
+            && self
+                .claim_boundary
+                .all_physical_review_and_success_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper16SkeletonCertificate {
     pub errc001_upstream_binding_closed: bool,
     pub errc002_finite_certificate_record_closed: bool,
@@ -983,6 +1090,33 @@ impl Paper16SkeletonCertificate {
         }
     }
 
+    pub fn from_errc007_no_hidden_claim_audit(
+        record: &ERRC002CertificateRecord,
+        descriptors: &ERRC003ReviewerProtocolProvenance,
+        artifacts: &ERRC004ArtifactEnvironmentHashes,
+        compatibility: &ERRC005Paper15Compatibility,
+        stability: &ERRC006StabilityAuditability,
+        hidden_claim_audit: &ERRC007NoHiddenClaimAudit,
+    ) -> Self {
+        Self {
+            errc001_upstream_binding_closed: ERRC001UpstreamBinding::canonical().closes_errc001(),
+            errc002_finite_certificate_record_closed: record.closes_errc002(),
+            errc003_reviewer_protocol_provenance_closed: descriptors.closes_errc003(),
+            errc004_reproduction_artifact_environment_closed: artifacts.closes_errc004(),
+            errc005_paper15_protocol_compatibility_closed: compatibility.closes_errc005(record),
+            errc006_stability_auditability_closed: stability.closes_errc006(
+                record,
+                descriptors,
+                artifacts,
+                compatibility,
+            ),
+            errc007_no_hidden_promotion_validation_acceptance_audit_closed: hidden_claim_audit
+                .closes_errc007(record, descriptors, artifacts, compatibility, stability),
+            errc008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper16_theorem(&self) -> bool {
         self.errc001_upstream_binding_closed
             && self.errc002_finite_certificate_record_closed
@@ -1022,6 +1156,10 @@ pub fn paper16_errc006_marker() -> &'static str {
     PAPER16_ERRC006_MARKER
 }
 
+pub fn paper16_errc007_marker() -> &'static str {
+    PAPER16_ERRC007_MARKER
+}
+
 pub fn is_sha1_hex(value: &str) -> bool {
     value.len() == 40 && value.bytes().all(|byte| byte.is_ascii_hexdigit())
 }
@@ -1033,5 +1171,5 @@ pub fn is_sha256_descriptor(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "ERRC-007"
+    "ERRC-008"
 }

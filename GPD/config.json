@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "external-review-and-reproduction-certificates-from-finite-capacity-causal-networks",
   "paper_number": 16,
-  "active_obligation": "ERRC-007",
+  "active_obligation": "ERRC-008",
   "theorem_prefix": "ERRC",
   "non_promotion_boundary_required": true,
   "rust_guard_crate": "cclab_accel",

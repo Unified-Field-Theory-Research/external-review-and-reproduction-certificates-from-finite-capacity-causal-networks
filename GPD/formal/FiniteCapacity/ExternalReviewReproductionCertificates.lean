@@ -664,6 +664,100 @@ theorem errc006_canonical_stability_auditability_closed :
   simp
 
 /--
+`ERRC-007` is the fail-closed audit that no hidden success, validation,
+promotion, physical-nature, or unified-field claim has been imported by the
+certificate interface rungs.
+-/
+structure ERRC007NoHiddenClaimImportAuditContract where
+  finiteAuditLabel : Prop
+  boundedAuditLabel : Prop
+  priorRungsRemainNonPromoting : Prop
+  rejectsCertificateRecoveryImport : Prop
+  rejectsProtocolRecoveryImport : Prop
+  rejectsReviewAcceptanceImport : Prop
+  rejectsReproductionSuccessImport : Prop
+  rejectsBenchmarkSuccessImport : Prop
+  rejectsPredictionSuccessImport : Prop
+  rejectsFalsificationSuccessImport : Prop
+  rejectsPhysicalPromotionImport : Prop
+  rejectsPhysicalValidationImport : Prop
+  rejectsEmpiricalAdequacyImport : Prop
+  rejectsObservedCatalogRecoveryImport : Prop
+  rejectsPhysicalStandardModelImport : Prop
+  rejectsPhysicalParticleExcitationImport : Prop
+  rejectsPhysicalMatterFieldImport : Prop
+  rejectsPhysicalGaugeFieldImport : Prop
+  rejectsPhysicalQuantumDynamicsImport : Prop
+  rejectsContinuumQuantumFieldTheoryImport : Prop
+  rejectsSimulationOnlyPromotionImport : Prop
+  rejectsFitOnlyCalibrationImport : Prop
+  rejectsPhysicalNatureImport : Prop
+  rejectsUnifiedFieldTheoryImport : Prop
+
+def ERRC007NoHiddenClaimImportAuditContract.closed
+    (c : ERRC007NoHiddenClaimImportAuditContract) : Prop :=
+  c.finiteAuditLabel ∧
+  c.boundedAuditLabel ∧
+  c.priorRungsRemainNonPromoting ∧
+  c.rejectsCertificateRecoveryImport ∧
+  c.rejectsProtocolRecoveryImport ∧
+  c.rejectsReviewAcceptanceImport ∧
+  c.rejectsReproductionSuccessImport ∧
+  c.rejectsBenchmarkSuccessImport ∧
+  c.rejectsPredictionSuccessImport ∧
+  c.rejectsFalsificationSuccessImport ∧
+  c.rejectsPhysicalPromotionImport ∧
+  c.rejectsPhysicalValidationImport ∧
+  c.rejectsEmpiricalAdequacyImport ∧
+  c.rejectsObservedCatalogRecoveryImport ∧
+  c.rejectsPhysicalStandardModelImport ∧
+  c.rejectsPhysicalParticleExcitationImport ∧
+  c.rejectsPhysicalMatterFieldImport ∧
+  c.rejectsPhysicalGaugeFieldImport ∧
+  c.rejectsPhysicalQuantumDynamicsImport ∧
+  c.rejectsContinuumQuantumFieldTheoryImport ∧
+  c.rejectsSimulationOnlyPromotionImport ∧
+  c.rejectsFitOnlyCalibrationImport ∧
+  c.rejectsPhysicalNatureImport ∧
+  c.rejectsUnifiedFieldTheoryImport
+
+def errc007CanonicalNoHiddenClaimImportAuditContract :
+    ERRC007NoHiddenClaimImportAuditContract :=
+  {
+    finiteAuditLabel := True,
+    boundedAuditLabel := True,
+    priorRungsRemainNonPromoting := True,
+    rejectsCertificateRecoveryImport := True,
+    rejectsProtocolRecoveryImport := True,
+    rejectsReviewAcceptanceImport := True,
+    rejectsReproductionSuccessImport := True,
+    rejectsBenchmarkSuccessImport := True,
+    rejectsPredictionSuccessImport := True,
+    rejectsFalsificationSuccessImport := True,
+    rejectsPhysicalPromotionImport := True,
+    rejectsPhysicalValidationImport := True,
+    rejectsEmpiricalAdequacyImport := True,
+    rejectsObservedCatalogRecoveryImport := True,
+    rejectsPhysicalStandardModelImport := True,
+    rejectsPhysicalParticleExcitationImport := True,
+    rejectsPhysicalMatterFieldImport := True,
+    rejectsPhysicalGaugeFieldImport := True,
+    rejectsPhysicalQuantumDynamicsImport := True,
+    rejectsContinuumQuantumFieldTheoryImport := True,
+    rejectsSimulationOnlyPromotionImport := True,
+    rejectsFitOnlyCalibrationImport := True,
+    rejectsPhysicalNatureImport := True,
+    rejectsUnifiedFieldTheoryImport := True
+  }
+
+theorem errc007_canonical_no_hidden_claim_import_audit_closed :
+    ERRC007NoHiddenClaimImportAuditContract.closed
+      errc007CanonicalNoHiddenClaimImportAuditContract := by
+  unfold ERRC007NoHiddenClaimImportAuditContract.closed
+  unfold errc007CanonicalNoHiddenClaimImportAuditContract
+  simp
+
+/--
 The full Paper 16 theorem stays closed only after a future final conditional
 certificate. `ERRC-001` intentionally leaves that field false.
 -/
@@ -984,6 +1078,66 @@ theorem paper16_errc006_stage_does_not_close_external_review_reproduction_certif
   unfold errc005CanonicalPaper15ProtocolCompatibilityContract
   unfold ERRC006StabilityAuditabilityContract.closed
   unfold errc006CanonicalStabilityAuditabilityContract
+  simp
+
+def paper16ERRC007NoHiddenClaimImportAuditContract :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract :=
+  {
+    errc001UpstreamBindingClosed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002FiniteCertificateRecordClosed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003ReviewerProtocolProvenanceClosed :=
+      ERRC003ReviewerProtocolProvenanceContract.closed
+        errc003CanonicalReviewerProtocolProvenanceContract,
+    errc004ReproductionArtifactEnvironmentClosed :=
+      ERRC004ArtifactEnvironmentHashContract.closed
+        errc004CanonicalArtifactEnvironmentHashContract,
+    errc005Paper15ProtocolCompatibilityClosed :=
+      ERRC005Paper15ProtocolCompatibilityContract.closed
+        errc005CanonicalPaper15ProtocolCompatibilityContract,
+    errc006StabilityAuditabilityClosed :=
+      ERRC006StabilityAuditabilityContract.closed
+        errc006CanonicalStabilityAuditabilityContract,
+    errc007NoHiddenPromotionValidationAcceptanceAuditClosed :=
+      ERRC007NoHiddenClaimImportAuditContract.closed
+        errc007CanonicalNoHiddenClaimImportAuditContract,
+    errc008FinalConditionalCertificateClosed := False,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem paper16_errc007_stage_does_not_close_external_review_reproduction_certificates_theorem :
+    ¬ Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+      paper16ERRC007NoHiddenClaimImportAuditContract := by
+  unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+  unfold paper16ERRC007NoHiddenClaimImportAuditContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
+  unfold ERRC004ArtifactEnvironmentHashContract.closed
+  unfold errc004CanonicalArtifactEnvironmentHashContract
+  unfold ERRC005Paper15ProtocolCompatibilityContract.closed
+  unfold errc005CanonicalPaper15ProtocolCompatibilityContract
+  unfold ERRC006StabilityAuditabilityContract.closed
+  unfold errc006CanonicalStabilityAuditabilityContract
+  unfold ERRC007NoHiddenClaimImportAuditContract.closed
+  unfold errc007CanonicalNoHiddenClaimImportAuditContract
   simp
 
 end FiniteCapacity

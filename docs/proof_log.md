@@ -18,4 +18,8 @@
   reference relation without success or acceptance imports.
 - Closed `ERRC-006` by defining certificate stability, auditability, and
   reproducibility behavior as finite re-checkability only.
-- Recorded `ERRC-007` as the active next obligation.
+- Closed `ERRC-007` by auditing hidden promotion, validation, review
+  acceptance, reproduction success, benchmark success, prediction success,
+  falsification success, simulation-only, fit-only, physical-nature, and
+  unified-field imports.
+- Recorded `ERRC-008` as the active next obligation.

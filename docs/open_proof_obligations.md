@@ -2,24 +2,20 @@
 
 ## Active
 
-### ERRC-007
+### ERRC-008
 
-Audit for hidden promotion, validation, review-acceptance, reproduction-success,
-and adjacent success imports.
+Assemble the final conditional external review and reproduction certificates
+theorem.
 
 Acceptance criteria:
 
-- the audit explicitly rejects physical promotion, physical validation, and
-  empirical adequacy imports
-- the audit explicitly rejects review acceptance and reproduction success
-  imports
-- the audit explicitly rejects benchmark, prediction, and falsification success
-  imports
-- the audit explicitly rejects simulation-only, fit-only, physical-nature, and
-  unified-field imports
-- Rust guards fail closed if any hidden claim flag is set
-- Lean scaffold records that `ERRC-007` is required before the full Paper 16
-  theorem can close
+- all rungs `ERRC-001` through `ERRC-007` are closed
+- the final conditional certificate closes the local Paper 16 theorem
+- every claim-boundary false flag remains false
+- Rust guards expose a complete Paper 16 certificate that closes only under
+  the non-promoting boundary
+- Lean scaffold proves the final contract from the closed rungs and boundary
+  guards
 
 ## Closed
 
@@ -29,3 +25,5 @@ Acceptance criteria:
 - `ERRC-004`: Finite reproduction artifact, environment, and hash descriptors.
 - `ERRC-005`: Paper 15 protocol compatibility without success imports.
 - `ERRC-006`: Certificate stability, auditability, and re-checkability behavior.
+- `ERRC-007`: No-hidden-promotion, validation, review-acceptance,
+  reproduction-success, and adjacent success import audit.

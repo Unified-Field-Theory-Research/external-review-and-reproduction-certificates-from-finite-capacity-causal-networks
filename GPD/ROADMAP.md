@@ -14,18 +14,19 @@
   falsification success.
 - `ERRC-006`: Certificate stability, auditability, and reproducibility behavior
   as finite re-checkability only.
+- `ERRC-007`: No-hidden-promotion, validation, review-acceptance,
+  reproduction-success, benchmark-success, prediction-success,
+  falsification-success, simulation-only, fit-only, physical-nature, or
+  unified-field import audit.
 
 ## Active
 
-- `ERRC-007`: Audit for hidden physical-promotion, validation, review
-  acceptance, reproduction-success, benchmark-success, prediction-success,
-  falsification-success, simulation-only, fit-only, physical-nature, and
-  unified-field imports.
+- `ERRC-008`: Assemble the final conditional external review and reproduction
+  certificates theorem without changing any claim-boundary false flags.
 
 ## Planned
 
-- `ERRC-008`: Assemble the final conditional external review and reproduction
-  certificates theorem.
+No planned rungs remain after `ERRC-008`.
 
 All planned rungs remain conditional and non-promoting unless explicitly
 closed by formal and Rust guards.

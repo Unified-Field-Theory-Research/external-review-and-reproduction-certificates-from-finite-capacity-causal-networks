@@ -23,14 +23,16 @@ reproduction success, physical validation, or unified-field promotion.
   reproduction success.
 - `ERRC-006`: Certificate stability, auditability, and reproducibility behavior
   as finite re-checkability only.
+- `ERRC-007`: No-hidden-promotion, validation, review-acceptance,
+  reproduction-success, and adjacent success import audit.
 
 ## Active Rung
 
-- `ERRC-007`: Audit hidden promotion, validation, review-acceptance,
-  reproduction-success, and adjacent success imports.
+- `ERRC-008`: Assemble the final conditional certificate.
 
-Required boundary for `ERRC-007`:
+Required boundary for `ERRC-008`:
 
+- all prior rungs closed
 - no certificate recovery claim
 - no review acceptance claim
 - no reproduction success claim
@@ -44,7 +46,7 @@ Required boundary for `ERRC-007`:
 
 ## Planned Rungs
 
-- `ERRC-008`: final conditional certificate
+No planned rungs remain after `ERRC-008`.
 
 ## Residual Risk
 

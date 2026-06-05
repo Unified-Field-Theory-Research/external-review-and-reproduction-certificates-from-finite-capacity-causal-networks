@@ -47,8 +47,9 @@ reviewer, protocol, and provenance descriptors. `ERRC-004` defines finite
 reproduction artifact, environment, and hash descriptors. `ERRC-005` defines
 the Paper 15 protocol compatibility reference relation. `ERRC-006` defines
 certificate stability, auditability, and re-checkability behavior. `ERRC-007`
-is the active next obligation: audit hidden promotion, validation,
-review-acceptance, reproduction-success, and adjacent success imports.
+defines the no-hidden-claim import audit. `ERRC-008` is the active next
+obligation: assemble the final conditional external review and reproduction
+certificates theorem.
 
 This does not prove certificate recovery, review acceptance, reproduction
 success, protocol recovery, benchmark success, prediction success,
