@@ -26,7 +26,8 @@
 a finite certificate-record interface. `ERRC-003` is closed as reviewer,
 protocol, and provenance descriptors. `ERRC-004` is closed as artifact,
 environment, and hash descriptors. `ERRC-005` is closed as Paper 15 protocol
-compatibility. `ERRC-006` is active.
+compatibility. `ERRC-006` is closed as stability and re-checkability behavior.
+`ERRC-007` is active.
 
 ## Downstream Roadmap
 

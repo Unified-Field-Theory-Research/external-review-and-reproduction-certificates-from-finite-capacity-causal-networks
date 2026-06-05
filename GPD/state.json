@@ -1,15 +1,16 @@
 {
   "schema_version": 1,
   "paper": 16,
-  "phase": 5,
-  "phase_name": "Paper 15 Protocol Compatibility",
-  "active_obligation": "ERRC-006",
+  "phase": 6,
+  "phase_name": "Stability Auditability Recheckability",
+  "active_obligation": "ERRC-007",
   "closed_obligations": [
     "ERRC-001",
     "ERRC-002",
     "ERRC-003",
     "ERRC-004",
-    "ERRC-005"
+    "ERRC-005",
+    "ERRC-006"
   ],
   "upstream_frozen_through_paper15": true,
   "paper15_frozen_commit": "b0fbcea9d936393586367e1ea9fb2586b4b4f7e3",
@@ -21,6 +22,7 @@
     "errc003_reviewer_protocol_provenance_closed": true,
     "errc004_reproduction_artifact_environment_closed": true,
     "errc005_paper15_protocol_compatibility_closed": true,
+    "errc006_stability_auditability_closed": true,
     "external_review_reproduction_certificates_theorem_closed": false,
     "certificate_recovery_claim": false,
     "review_acceptance_claim": false,
@@ -44,5 +46,5 @@
     "physical_nature_claim": false,
     "unified_field_theory_claim": false
   },
-  "next_move": "ERRC-006: define certificate stability, auditability, and reproducibility behavior without claiming reproduction success, empirical adequacy, physical validation, or promotion."
+  "next_move": "ERRC-007: audit hidden promotion, validation, review-acceptance, reproduction-success, benchmark-success, prediction-success, falsification-success, simulation-only, fit-only, physical-nature, and unified-field imports."
 }

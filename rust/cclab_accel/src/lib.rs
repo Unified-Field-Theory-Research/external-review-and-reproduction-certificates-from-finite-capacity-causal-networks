@@ -29,6 +29,8 @@ pub const PAPER16_ERRC004_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc004-artifact-environment-hashes";
 pub const PAPER16_ERRC005_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc005-paper15-compatibility";
+pub const PAPER16_ERRC006_MARKER: &str =
+    "paper16-external-review-reproduction-certificates-errc006-stability-auditability";
 
 pub const CERTIFICATE_IDENTIFIER_MAX_BYTES: usize = 64;
 pub const REVIEWER_LABEL_MAX_BYTES: usize = 64;
@@ -42,6 +44,8 @@ pub const ENVIRONMENT_HASH_DESCRIPTOR_MAX_BYTES: usize = 71;
 pub const PAPER15_PROTOCOL_REFERENCE_MAX_BYTES: usize = 128;
 pub const PAPER15_CERTIFICATE_REFERENCE_MAX_BYTES: usize = 128;
 pub const COMPATIBILITY_RELATION_MAX_BYTES: usize = 128;
+pub const AUDIT_SNAPSHOT_LABEL_MAX_BYTES: usize = 96;
+pub const RECHECK_PROCEDURE_LABEL_MAX_BYTES: usize = 128;
 pub const PROVENANCE_SOURCE_MAX_BYTES: usize = 96;
 pub const PROVENANCE_TIMESTAMP_MAX_BYTES: usize = 32;
 pub const PROVENANCE_CUSTODIAN_MAX_BYTES: usize = 96;
@@ -753,6 +757,112 @@ impl ERRC005Paper15Compatibility {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ERRC006StabilityAuditability {
+    pub audit_snapshot_label: BoundedCertificateText,
+    pub recheck_procedure_label: BoundedCertificateText,
+    pub audit_status: AuditStatusDescriptor,
+    pub preserves_certificate_identifier: bool,
+    pub preserves_reviewer_protocol_provenance: bool,
+    pub preserves_artifact_environment_hashes: bool,
+    pub preserves_paper15_compatibility_reference: bool,
+    pub finite_recheckability_behavior: bool,
+    pub audit_status_non_promoting: bool,
+    pub reproducibility_is_recheckability_only: bool,
+    pub no_certificate_recovery_claim: bool,
+    pub no_review_acceptance_claim: bool,
+    pub no_reproduction_success_claim: bool,
+    pub no_benchmark_success_claim: bool,
+    pub no_prediction_success_claim: bool,
+    pub no_falsification_success_claim: bool,
+    pub no_physical_validation_claim: bool,
+    pub no_empirical_adequacy_claim: bool,
+    pub no_physical_promotion_claim: bool,
+    pub no_simulation_only_promotion: bool,
+    pub no_fit_only_calibration_claim: bool,
+    pub no_physical_nature_claim: bool,
+    pub no_unified_field_theory_claim: bool,
+    pub claim_boundary: Paper16ClaimBoundary,
+}
+
+impl ERRC006StabilityAuditability {
+    pub const fn canonical() -> Self {
+        Self {
+            audit_snapshot_label: BoundedCertificateText::new(
+                "finite-audit-snapshot-label",
+                AUDIT_SNAPSHOT_LABEL_MAX_BYTES,
+            ),
+            recheck_procedure_label: BoundedCertificateText::new(
+                "finite-certificate-row-recheck-procedure",
+                RECHECK_PROCEDURE_LABEL_MAX_BYTES,
+            ),
+            audit_status: AuditStatusDescriptor::BoundaryChecked,
+            preserves_certificate_identifier: true,
+            preserves_reviewer_protocol_provenance: true,
+            preserves_artifact_environment_hashes: true,
+            preserves_paper15_compatibility_reference: true,
+            finite_recheckability_behavior: true,
+            audit_status_non_promoting: true,
+            reproducibility_is_recheckability_only: true,
+            no_certificate_recovery_claim: true,
+            no_review_acceptance_claim: true,
+            no_reproduction_success_claim: true,
+            no_benchmark_success_claim: true,
+            no_prediction_success_claim: true,
+            no_falsification_success_claim: true,
+            no_physical_validation_claim: true,
+            no_empirical_adequacy_claim: true,
+            no_physical_promotion_claim: true,
+            no_simulation_only_promotion: true,
+            no_fit_only_calibration_claim: true,
+            no_physical_nature_claim: true,
+            no_unified_field_theory_claim: true,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_errc006(
+        &self,
+        record: &ERRC002CertificateRecord,
+        descriptors: &ERRC003ReviewerProtocolProvenance,
+        artifacts: &ERRC004ArtifactEnvironmentHashes,
+        compatibility: &ERRC005Paper15Compatibility,
+    ) -> bool {
+        self.audit_snapshot_label.is_finite_bounded_label()
+            && self.audit_snapshot_label.max_bytes == AUDIT_SNAPSHOT_LABEL_MAX_BYTES
+            && self.recheck_procedure_label.is_finite_bounded_label()
+            && self.recheck_procedure_label.max_bytes == RECHECK_PROCEDURE_LABEL_MAX_BYTES
+            && self.audit_status.is_finite_descriptor()
+            && record.closes_errc002()
+            && descriptors.closes_errc003()
+            && artifacts.closes_errc004()
+            && compatibility.closes_errc005(record)
+            && self.preserves_certificate_identifier
+            && self.preserves_reviewer_protocol_provenance
+            && self.preserves_artifact_environment_hashes
+            && self.preserves_paper15_compatibility_reference
+            && self.finite_recheckability_behavior
+            && self.audit_status_non_promoting
+            && self.reproducibility_is_recheckability_only
+            && self.no_certificate_recovery_claim
+            && self.no_review_acceptance_claim
+            && self.no_reproduction_success_claim
+            && self.no_benchmark_success_claim
+            && self.no_prediction_success_claim
+            && self.no_falsification_success_claim
+            && self.no_physical_validation_claim
+            && self.no_empirical_adequacy_claim
+            && self.no_physical_promotion_claim
+            && self.no_simulation_only_promotion
+            && self.no_fit_only_calibration_claim
+            && self.no_physical_nature_claim
+            && self.no_unified_field_theory_claim
+            && self
+                .claim_boundary
+                .all_physical_review_and_success_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper16SkeletonCertificate {
     pub errc001_upstream_binding_closed: bool,
     pub errc002_finite_certificate_record_closed: bool,
@@ -848,6 +958,31 @@ impl Paper16SkeletonCertificate {
         }
     }
 
+    pub fn from_errc006_stability(
+        record: &ERRC002CertificateRecord,
+        descriptors: &ERRC003ReviewerProtocolProvenance,
+        artifacts: &ERRC004ArtifactEnvironmentHashes,
+        compatibility: &ERRC005Paper15Compatibility,
+        stability: &ERRC006StabilityAuditability,
+    ) -> Self {
+        Self {
+            errc001_upstream_binding_closed: ERRC001UpstreamBinding::canonical().closes_errc001(),
+            errc002_finite_certificate_record_closed: record.closes_errc002(),
+            errc003_reviewer_protocol_provenance_closed: descriptors.closes_errc003(),
+            errc004_reproduction_artifact_environment_closed: artifacts.closes_errc004(),
+            errc005_paper15_protocol_compatibility_closed: compatibility.closes_errc005(record),
+            errc006_stability_auditability_closed: stability.closes_errc006(
+                record,
+                descriptors,
+                artifacts,
+                compatibility,
+            ),
+            errc007_no_hidden_promotion_validation_acceptance_audit_closed: false,
+            errc008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper16_theorem(&self) -> bool {
         self.errc001_upstream_binding_closed
             && self.errc002_finite_certificate_record_closed
@@ -883,6 +1018,10 @@ pub fn paper16_errc005_marker() -> &'static str {
     PAPER16_ERRC005_MARKER
 }
 
+pub fn paper16_errc006_marker() -> &'static str {
+    PAPER16_ERRC006_MARKER
+}
+
 pub fn is_sha1_hex(value: &str) -> bool {
     value.len() == 40 && value.bytes().all(|byte| byte.is_ascii_hexdigit())
 }
@@ -894,5 +1033,5 @@ pub fn is_sha256_descriptor(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "ERRC-006"
+    "ERRC-007"
 }

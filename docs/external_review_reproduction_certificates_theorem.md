@@ -21,19 +21,16 @@ reproduction success, physical validation, or unified-field promotion.
 - `ERRC-004`: Finite reproduction artifact, environment, and hash descriptors.
 - `ERRC-005`: Paper 15 protocol compatibility without review acceptance or
   reproduction success.
+- `ERRC-006`: Certificate stability, auditability, and reproducibility behavior
+  as finite re-checkability only.
 
 ## Active Rung
 
-- `ERRC-006`: Define certificate stability, auditability, and reproducibility
-  behavior.
+- `ERRC-007`: Audit hidden promotion, validation, review-acceptance,
+  reproduction-success, and adjacent success imports.
 
-Required boundary for `ERRC-006`:
+Required boundary for `ERRC-007`:
 
-- finite audit snapshot labels
-- stable certificate identifier preservation
-- stable descriptor preservation
-- stable artifact and environment hash preservation
-- finite re-checkability behavior
 - no certificate recovery claim
 - no review acceptance claim
 - no reproduction success claim
@@ -47,8 +44,6 @@ Required boundary for `ERRC-006`:
 
 ## Planned Rungs
 
-- `ERRC-007`: no-hidden-promotion, validation, review-acceptance, or
-  reproduction-success import audit
 - `ERRC-008`: final conditional certificate
 
 ## Residual Risk

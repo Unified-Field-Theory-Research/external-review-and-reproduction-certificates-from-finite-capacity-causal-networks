@@ -2,21 +2,23 @@
 
 ## Active
 
-### ERRC-006
+### ERRC-007
 
-Define certificate stability, auditability, and reproducibility behavior for
-finite certificate rows.
+Audit for hidden promotion, validation, review-acceptance, reproduction-success,
+and adjacent success imports.
 
 Acceptance criteria:
 
-- stable certificate rows preserve identifiers, descriptors, and hash bindings
-  across finite audit snapshots
-- audit rows are finite and carry non-promotion, non-validation, and no-success
-  status flags
-- reproducibility behavior means finite re-checkability of certificate rows,
-  not successful external reproduction
-- Rust guards reject stability/auditability rows that import success claims
-- Lean scaffold records that `ERRC-006` is required before the full Paper 16
+- the audit explicitly rejects physical promotion, physical validation, and
+  empirical adequacy imports
+- the audit explicitly rejects review acceptance and reproduction success
+  imports
+- the audit explicitly rejects benchmark, prediction, and falsification success
+  imports
+- the audit explicitly rejects simulation-only, fit-only, physical-nature, and
+  unified-field imports
+- Rust guards fail closed if any hidden claim flag is set
+- Lean scaffold records that `ERRC-007` is required before the full Paper 16
   theorem can close
 
 ## Closed
@@ -26,3 +28,4 @@ Acceptance criteria:
 - `ERRC-003`: Finite reviewer, protocol, and provenance descriptors.
 - `ERRC-004`: Finite reproduction artifact, environment, and hash descriptors.
 - `ERRC-005`: Paper 15 protocol compatibility without success imports.
+- `ERRC-006`: Certificate stability, auditability, and re-checkability behavior.

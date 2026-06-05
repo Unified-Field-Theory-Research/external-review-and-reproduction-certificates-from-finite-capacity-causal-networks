@@ -10,11 +10,12 @@ external review and reproduction certificate record interface. `ERRC-003` is
 closed as finite reviewer, protocol, and provenance descriptors. `ERRC-004` is
 closed as finite reproduction artifact, environment, and hash descriptors.
 `ERRC-005` is closed as Paper 15 protocol compatibility without success
-imports.
+imports. `ERRC-006` is closed as certificate stability, auditability, and
+finite re-checkability behavior.
 
-The local theorem is not closed. The active next obligation is `ERRC-006`:
-define certificate stability, auditability, and reproducibility behavior as
-bounded, auditable, non-promoting behavior.
+The local theorem is not closed. The active next obligation is `ERRC-007`:
+audit hidden promotion, validation, review-acceptance, reproduction-success,
+and adjacent success imports.
 
 ## Claim Boundary
 

@@ -564,6 +564,106 @@ theorem errc005_canonical_paper15_protocol_compatibility_closed :
   simp
 
 /--
+`ERRC-006` defines stability and auditability for finite certificate rows.
+Reproducibility behavior is finite re-checkability of the certificate
+interface, not successful external reproduction.
+-/
+structure ERRC006StabilityAuditabilityContract where
+  finiteAuditSnapshotLabel : Prop
+  finiteRecheckProcedureLabel : Prop
+  finiteAuditStatusDescriptor : Prop
+  boundedAuditSnapshotLabel : Prop
+  boundedRecheckProcedureLabel : Prop
+  boundedAuditStatusDescriptor : Prop
+  preservesCertificateIdentifier : Prop
+  preservesReviewerProtocolProvenance : Prop
+  preservesArtifactEnvironmentHashes : Prop
+  preservesPaper15CompatibilityReference : Prop
+  finiteRecheckabilityBehavior : Prop
+  auditStatusNonPromoting : Prop
+  reproducibilityMeansRecheckabilityOnly : Prop
+  noCertificateRecoveryClaim : Prop
+  noReviewAcceptanceClaim : Prop
+  noReproductionSuccessClaim : Prop
+  noBenchmarkSuccessClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noSimulationOnlyPromotionClaim : Prop
+  noFitOnlyCalibrationClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def ERRC006StabilityAuditabilityContract.closed
+    (c : ERRC006StabilityAuditabilityContract) : Prop :=
+  c.finiteAuditSnapshotLabel ∧
+  c.finiteRecheckProcedureLabel ∧
+  c.finiteAuditStatusDescriptor ∧
+  c.boundedAuditSnapshotLabel ∧
+  c.boundedRecheckProcedureLabel ∧
+  c.boundedAuditStatusDescriptor ∧
+  c.preservesCertificateIdentifier ∧
+  c.preservesReviewerProtocolProvenance ∧
+  c.preservesArtifactEnvironmentHashes ∧
+  c.preservesPaper15CompatibilityReference ∧
+  c.finiteRecheckabilityBehavior ∧
+  c.auditStatusNonPromoting ∧
+  c.reproducibilityMeansRecheckabilityOnly ∧
+  c.noCertificateRecoveryClaim ∧
+  c.noReviewAcceptanceClaim ∧
+  c.noReproductionSuccessClaim ∧
+  c.noBenchmarkSuccessClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noSimulationOnlyPromotionClaim ∧
+  c.noFitOnlyCalibrationClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+def errc006CanonicalStabilityAuditabilityContract :
+    ERRC006StabilityAuditabilityContract :=
+  {
+    finiteAuditSnapshotLabel := True,
+    finiteRecheckProcedureLabel := True,
+    finiteAuditStatusDescriptor := True,
+    boundedAuditSnapshotLabel := True,
+    boundedRecheckProcedureLabel := True,
+    boundedAuditStatusDescriptor := True,
+    preservesCertificateIdentifier := True,
+    preservesReviewerProtocolProvenance := True,
+    preservesArtifactEnvironmentHashes := True,
+    preservesPaper15CompatibilityReference := True,
+    finiteRecheckabilityBehavior := True,
+    auditStatusNonPromoting := True,
+    reproducibilityMeansRecheckabilityOnly := True,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalPromotionClaim := True,
+    noSimulationOnlyPromotionClaim := True,
+    noFitOnlyCalibrationClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem errc006_canonical_stability_auditability_closed :
+    ERRC006StabilityAuditabilityContract.closed
+      errc006CanonicalStabilityAuditabilityContract := by
+  unfold ERRC006StabilityAuditabilityContract.closed
+  unfold errc006CanonicalStabilityAuditabilityContract
+  simp
+
+/--
 The full Paper 16 theorem stays closed only after a future final conditional
 certificate. `ERRC-001` intentionally leaves that field false.
 -/
@@ -828,6 +928,62 @@ theorem paper16_errc005_stage_does_not_close_external_review_reproduction_certif
   unfold errc004CanonicalArtifactEnvironmentHashContract
   unfold ERRC005Paper15ProtocolCompatibilityContract.closed
   unfold errc005CanonicalPaper15ProtocolCompatibilityContract
+  simp
+
+def paper16ERRC006StabilityAuditabilityContract :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract :=
+  {
+    errc001UpstreamBindingClosed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002FiniteCertificateRecordClosed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003ReviewerProtocolProvenanceClosed :=
+      ERRC003ReviewerProtocolProvenanceContract.closed
+        errc003CanonicalReviewerProtocolProvenanceContract,
+    errc004ReproductionArtifactEnvironmentClosed :=
+      ERRC004ArtifactEnvironmentHashContract.closed
+        errc004CanonicalArtifactEnvironmentHashContract,
+    errc005Paper15ProtocolCompatibilityClosed :=
+      ERRC005Paper15ProtocolCompatibilityContract.closed
+        errc005CanonicalPaper15ProtocolCompatibilityContract,
+    errc006StabilityAuditabilityClosed :=
+      ERRC006StabilityAuditabilityContract.closed
+        errc006CanonicalStabilityAuditabilityContract,
+    errc007NoHiddenPromotionValidationAcceptanceAuditClosed := False,
+    errc008FinalConditionalCertificateClosed := False,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem paper16_errc006_stage_does_not_close_external_review_reproduction_certificates_theorem :
+    ¬ Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+      paper16ERRC006StabilityAuditabilityContract := by
+  unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+  unfold paper16ERRC006StabilityAuditabilityContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
+  unfold ERRC004ArtifactEnvironmentHashContract.closed
+  unfold errc004CanonicalArtifactEnvironmentHashContract
+  unfold ERRC005Paper15ProtocolCompatibilityContract.closed
+  unfold errc005CanonicalPaper15ProtocolCompatibilityContract
+  unfold ERRC006StabilityAuditabilityContract.closed
+  unfold errc006CanonicalStabilityAuditabilityContract
   simp
 
 end FiniteCapacity

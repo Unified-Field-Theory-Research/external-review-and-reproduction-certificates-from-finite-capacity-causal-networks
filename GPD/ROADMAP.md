@@ -12,17 +12,18 @@
 - `ERRC-005`: Paper 15 protocol compatibility without review acceptance,
   reproduction success, protocol recovery, prediction success, or
   falsification success.
+- `ERRC-006`: Certificate stability, auditability, and reproducibility behavior
+  as finite re-checkability only.
 
 ## Active
 
-- `ERRC-006`: Define certificate stability, auditability, and reproducibility
-  behavior without claiming reproduction success, empirical adequacy, physical
-  validation, or physical promotion.
+- `ERRC-007`: Audit for hidden physical-promotion, validation, review
+  acceptance, reproduction-success, benchmark-success, prediction-success,
+  falsification-success, simulation-only, fit-only, physical-nature, and
+  unified-field imports.
 
 ## Planned
 
-- `ERRC-007`: Audit for hidden physical-promotion, validation, review
-  acceptance, or reproduction-success imports.
 - `ERRC-008`: Assemble the final conditional external review and reproduction
   certificates theorem.
 

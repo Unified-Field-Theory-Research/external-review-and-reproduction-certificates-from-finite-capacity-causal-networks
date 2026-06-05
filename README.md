@@ -44,10 +44,11 @@ upstream binding and claim boundary through the closed Paper 15 result.
 `ERRC-002` defines finite external review and reproduction certificate records
 as bounded, auditable, non-promoting interface rows. `ERRC-003` defines finite
 reviewer, protocol, and provenance descriptors. `ERRC-004` defines finite
-reproduction artifact, environment, and hash descriptors. `ERRC-005` is the
-Paper 15 protocol compatibility reference relation. `ERRC-006` is the active
-next obligation: define certificate stability, auditability, and
-reproducibility behavior.
+reproduction artifact, environment, and hash descriptors. `ERRC-005` defines
+the Paper 15 protocol compatibility reference relation. `ERRC-006` defines
+certificate stability, auditability, and re-checkability behavior. `ERRC-007`
+is the active next obligation: audit hidden promotion, validation,
+review-acceptance, reproduction-success, and adjacent success imports.
 
 This does not prove certificate recovery, review acceptance, reproduction
 success, protocol recovery, benchmark success, prediction success,

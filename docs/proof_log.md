@@ -16,4 +16,6 @@
   hash descriptors as audit-only, non-promoting interface components.
 - Closed `ERRC-005` by defining Paper 15 protocol compatibility as a finite
   reference relation without success or acceptance imports.
-- Recorded `ERRC-006` as the active next obligation.
+- Closed `ERRC-006` by defining certificate stability, auditability, and
+  reproducibility behavior as finite re-checkability only.
+- Recorded `ERRC-007` as the active next obligation.
