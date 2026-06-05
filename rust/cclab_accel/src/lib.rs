@@ -33,6 +33,8 @@ pub const PAPER16_ERRC006_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc006-stability-auditability";
 pub const PAPER16_ERRC007_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc007-no-hidden-claim-imports";
+pub const PAPER16_ERRC008_MARKER: &str =
+    "paper16-external-review-reproduction-certificates-errc008-final-conditional-certificate";
 
 pub const CERTIFICATE_IDENTIFIER_MAX_BYTES: usize = 64;
 pub const REVIEWER_LABEL_MAX_BYTES: usize = 64;
@@ -49,6 +51,7 @@ pub const COMPATIBILITY_RELATION_MAX_BYTES: usize = 128;
 pub const AUDIT_SNAPSHOT_LABEL_MAX_BYTES: usize = 96;
 pub const RECHECK_PROCEDURE_LABEL_MAX_BYTES: usize = 128;
 pub const HIDDEN_CLAIM_AUDIT_LABEL_MAX_BYTES: usize = 128;
+pub const FINAL_CERTIFICATE_LABEL_MAX_BYTES: usize = 128;
 pub const PROVENANCE_SOURCE_MAX_BYTES: usize = 96;
 pub const PROVENANCE_TIMESTAMP_MAX_BYTES: usize = 32;
 pub const PROVENANCE_CUSTODIAN_MAX_BYTES: usize = 96;
@@ -970,6 +973,91 @@ impl ERRC007NoHiddenClaimAudit {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ERRC008FinalConditionalCertificate {
+    pub final_certificate_label: BoundedCertificateText,
+    pub final_certificate_assembled: bool,
+    pub no_certificate_recovery_claim: bool,
+    pub no_review_acceptance_claim: bool,
+    pub no_reproduction_success_claim: bool,
+    pub no_protocol_recovery_claim: bool,
+    pub no_benchmark_success_claim: bool,
+    pub no_prediction_success_claim: bool,
+    pub no_falsification_success_claim: bool,
+    pub no_physical_promotion_claim: bool,
+    pub no_physical_validation_claim: bool,
+    pub no_empirical_adequacy_claim: bool,
+    pub no_physical_nature_claim: bool,
+    pub no_unified_field_theory_claim: bool,
+    pub claim_boundary: Paper16ClaimBoundary,
+}
+
+impl ERRC008FinalConditionalCertificate {
+    pub const fn canonical() -> Self {
+        Self {
+            final_certificate_label: BoundedCertificateText::new(
+                "paper16-errc008-final-conditional-certificate",
+                FINAL_CERTIFICATE_LABEL_MAX_BYTES,
+            ),
+            final_certificate_assembled: true,
+            no_certificate_recovery_claim: true,
+            no_review_acceptance_claim: true,
+            no_reproduction_success_claim: true,
+            no_protocol_recovery_claim: true,
+            no_benchmark_success_claim: true,
+            no_prediction_success_claim: true,
+            no_falsification_success_claim: true,
+            no_physical_promotion_claim: true,
+            no_physical_validation_claim: true,
+            no_empirical_adequacy_claim: true,
+            no_physical_nature_claim: true,
+            no_unified_field_theory_claim: true,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_errc008(
+        &self,
+        record: &ERRC002CertificateRecord,
+        descriptors: &ERRC003ReviewerProtocolProvenance,
+        artifacts: &ERRC004ArtifactEnvironmentHashes,
+        compatibility: &ERRC005Paper15Compatibility,
+        stability: &ERRC006StabilityAuditability,
+        hidden_claim_audit: &ERRC007NoHiddenClaimAudit,
+    ) -> bool {
+        self.final_certificate_label.is_finite_bounded_label()
+            && self.final_certificate_label.max_bytes == FINAL_CERTIFICATE_LABEL_MAX_BYTES
+            && record.closes_errc002()
+            && descriptors.closes_errc003()
+            && artifacts.closes_errc004()
+            && compatibility.closes_errc005(record)
+            && stability.closes_errc006(record, descriptors, artifacts, compatibility)
+            && hidden_claim_audit.closes_errc007(
+                record,
+                descriptors,
+                artifacts,
+                compatibility,
+                stability,
+            )
+            && self.final_certificate_assembled
+            && self.no_certificate_recovery_claim
+            && self.no_review_acceptance_claim
+            && self.no_reproduction_success_claim
+            && self.no_protocol_recovery_claim
+            && self.no_benchmark_success_claim
+            && self.no_prediction_success_claim
+            && self.no_falsification_success_claim
+            && self.no_physical_promotion_claim
+            && self.no_physical_validation_claim
+            && self.no_empirical_adequacy_claim
+            && self.no_physical_nature_claim
+            && self.no_unified_field_theory_claim
+            && self
+                .claim_boundary
+                .all_physical_review_and_success_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper16SkeletonCertificate {
     pub errc001_upstream_binding_closed: bool,
     pub errc002_finite_certificate_record_closed: bool,
@@ -1117,6 +1205,41 @@ impl Paper16SkeletonCertificate {
         }
     }
 
+    pub fn from_errc008_final_certificate(
+        record: &ERRC002CertificateRecord,
+        descriptors: &ERRC003ReviewerProtocolProvenance,
+        artifacts: &ERRC004ArtifactEnvironmentHashes,
+        compatibility: &ERRC005Paper15Compatibility,
+        stability: &ERRC006StabilityAuditability,
+        hidden_claim_audit: &ERRC007NoHiddenClaimAudit,
+        final_certificate: &ERRC008FinalConditionalCertificate,
+    ) -> Self {
+        Self {
+            errc001_upstream_binding_closed: ERRC001UpstreamBinding::canonical().closes_errc001(),
+            errc002_finite_certificate_record_closed: record.closes_errc002(),
+            errc003_reviewer_protocol_provenance_closed: descriptors.closes_errc003(),
+            errc004_reproduction_artifact_environment_closed: artifacts.closes_errc004(),
+            errc005_paper15_protocol_compatibility_closed: compatibility.closes_errc005(record),
+            errc006_stability_auditability_closed: stability.closes_errc006(
+                record,
+                descriptors,
+                artifacts,
+                compatibility,
+            ),
+            errc007_no_hidden_promotion_validation_acceptance_audit_closed: hidden_claim_audit
+                .closes_errc007(record, descriptors, artifacts, compatibility, stability),
+            errc008_final_conditional_certificate_closed: final_certificate.closes_errc008(
+                record,
+                descriptors,
+                artifacts,
+                compatibility,
+                stability,
+                hidden_claim_audit,
+            ),
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper16_theorem(&self) -> bool {
         self.errc001_upstream_binding_closed
             && self.errc002_finite_certificate_record_closed
@@ -1160,6 +1283,10 @@ pub fn paper16_errc007_marker() -> &'static str {
     PAPER16_ERRC007_MARKER
 }
 
+pub fn paper16_errc008_marker() -> &'static str {
+    PAPER16_ERRC008_MARKER
+}
+
 pub fn is_sha1_hex(value: &str) -> bool {
     value.len() == 40 && value.bytes().all(|byte| byte.is_ascii_hexdigit())
 }
@@ -1171,5 +1298,5 @@ pub fn is_sha256_descriptor(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "ERRC-008"
+    "NONE"
 }

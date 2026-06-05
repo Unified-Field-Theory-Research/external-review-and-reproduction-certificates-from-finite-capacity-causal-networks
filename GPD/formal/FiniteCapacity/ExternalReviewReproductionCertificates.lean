@@ -758,6 +758,117 @@ theorem errc007_canonical_no_hidden_claim_import_audit_closed :
   simp
 
 /--
+`ERRC-008` assembles the final conditional certificate. It closes only the
+local Paper 16 certificate-interface theorem, and it preserves every claim
+boundary that keeps review acceptance, reproduction success, validation,
+promotion, physical nature, and unified-field claims out of scope.
+-/
+structure ERRC008FinalConditionalCertificateContract where
+  errc001Closed : Prop
+  errc002Closed : Prop
+  errc003Closed : Prop
+  errc004Closed : Prop
+  errc005Closed : Prop
+  errc006Closed : Prop
+  errc007Closed : Prop
+  finalCertificateAssembled : Prop
+  noCertificateRecoveryClaim : Prop
+  noReviewAcceptanceClaim : Prop
+  noReproductionSuccessClaim : Prop
+  noProtocolRecoveryClaim : Prop
+  noBenchmarkSuccessClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def ERRC008FinalConditionalCertificateContract.closed
+    (c : ERRC008FinalConditionalCertificateContract) : Prop :=
+  c.errc001Closed ∧
+  c.errc002Closed ∧
+  c.errc003Closed ∧
+  c.errc004Closed ∧
+  c.errc005Closed ∧
+  c.errc006Closed ∧
+  c.errc007Closed ∧
+  c.finalCertificateAssembled ∧
+  c.noCertificateRecoveryClaim ∧
+  c.noReviewAcceptanceClaim ∧
+  c.noReproductionSuccessClaim ∧
+  c.noProtocolRecoveryClaim ∧
+  c.noBenchmarkSuccessClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+def errc008CanonicalFinalConditionalCertificateContract :
+    ERRC008FinalConditionalCertificateContract :=
+  {
+    errc001Closed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002Closed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003Closed :=
+      ERRC003ReviewerProtocolProvenanceContract.closed
+        errc003CanonicalReviewerProtocolProvenanceContract,
+    errc004Closed :=
+      ERRC004ArtifactEnvironmentHashContract.closed
+        errc004CanonicalArtifactEnvironmentHashContract,
+    errc005Closed :=
+      ERRC005Paper15ProtocolCompatibilityContract.closed
+        errc005CanonicalPaper15ProtocolCompatibilityContract,
+    errc006Closed :=
+      ERRC006StabilityAuditabilityContract.closed
+        errc006CanonicalStabilityAuditabilityContract,
+    errc007Closed :=
+      ERRC007NoHiddenClaimImportAuditContract.closed
+        errc007CanonicalNoHiddenClaimImportAuditContract,
+    finalCertificateAssembled := True,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem errc008_canonical_final_conditional_certificate_closed :
+    ERRC008FinalConditionalCertificateContract.closed
+      errc008CanonicalFinalConditionalCertificateContract := by
+  unfold ERRC008FinalConditionalCertificateContract.closed
+  unfold errc008CanonicalFinalConditionalCertificateContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
+  unfold ERRC004ArtifactEnvironmentHashContract.closed
+  unfold errc004CanonicalArtifactEnvironmentHashContract
+  unfold ERRC005Paper15ProtocolCompatibilityContract.closed
+  unfold errc005CanonicalPaper15ProtocolCompatibilityContract
+  unfold ERRC006StabilityAuditabilityContract.closed
+  unfold errc006CanonicalStabilityAuditabilityContract
+  unfold ERRC007NoHiddenClaimImportAuditContract.closed
+  unfold errc007CanonicalNoHiddenClaimImportAuditContract
+  simp
+
+/--
 The full Paper 16 theorem stays closed only after a future final conditional
 certificate. `ERRC-001` intentionally leaves that field false.
 -/
@@ -1138,6 +1249,70 @@ theorem paper16_errc007_stage_does_not_close_external_review_reproduction_certif
   unfold errc006CanonicalStabilityAuditabilityContract
   unfold ERRC007NoHiddenClaimImportAuditContract.closed
   unfold errc007CanonicalNoHiddenClaimImportAuditContract
+  simp
+
+def paper16FinalExternalReviewReproductionCertificatesTheoremContract :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract :=
+  {
+    errc001UpstreamBindingClosed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002FiniteCertificateRecordClosed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003ReviewerProtocolProvenanceClosed :=
+      ERRC003ReviewerProtocolProvenanceContract.closed
+        errc003CanonicalReviewerProtocolProvenanceContract,
+    errc004ReproductionArtifactEnvironmentClosed :=
+      ERRC004ArtifactEnvironmentHashContract.closed
+        errc004CanonicalArtifactEnvironmentHashContract,
+    errc005Paper15ProtocolCompatibilityClosed :=
+      ERRC005Paper15ProtocolCompatibilityContract.closed
+        errc005CanonicalPaper15ProtocolCompatibilityContract,
+    errc006StabilityAuditabilityClosed :=
+      ERRC006StabilityAuditabilityContract.closed
+        errc006CanonicalStabilityAuditabilityContract,
+    errc007NoHiddenPromotionValidationAcceptanceAuditClosed :=
+      ERRC007NoHiddenClaimImportAuditContract.closed
+        errc007CanonicalNoHiddenClaimImportAuditContract,
+    errc008FinalConditionalCertificateClosed :=
+      ERRC008FinalConditionalCertificateContract.closed
+        errc008CanonicalFinalConditionalCertificateContract,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem paper16_errc008_final_conditional_certificate_closes_external_review_reproduction_certificates_theorem :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+      paper16FinalExternalReviewReproductionCertificatesTheoremContract := by
+  unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+  unfold paper16FinalExternalReviewReproductionCertificatesTheoremContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
+  unfold ERRC004ArtifactEnvironmentHashContract.closed
+  unfold errc004CanonicalArtifactEnvironmentHashContract
+  unfold ERRC005Paper15ProtocolCompatibilityContract.closed
+  unfold errc005CanonicalPaper15ProtocolCompatibilityContract
+  unfold ERRC006StabilityAuditabilityContract.closed
+  unfold errc006CanonicalStabilityAuditabilityContract
+  unfold ERRC007NoHiddenClaimImportAuditContract.closed
+  unfold errc007CanonicalNoHiddenClaimImportAuditContract
+  unfold ERRC008FinalConditionalCertificateContract.closed
+  unfold errc008CanonicalFinalConditionalCertificateContract
   simp
 
 end FiniteCapacity

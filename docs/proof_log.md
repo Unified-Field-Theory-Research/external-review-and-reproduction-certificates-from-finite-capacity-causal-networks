@@ -22,4 +22,6 @@
   acceptance, reproduction success, benchmark success, prediction success,
   falsification success, simulation-only, fit-only, physical-nature, and
   unified-field imports.
-- Recorded `ERRC-008` as the active next obligation.
+- Closed `ERRC-008` by assembling the final conditional external review and
+  reproduction certificates theorem.
+- Recorded no active proof obligations remaining.

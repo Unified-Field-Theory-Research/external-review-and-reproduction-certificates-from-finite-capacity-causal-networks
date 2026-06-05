@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "paper": 16,
-  "phase": 7,
-  "phase_name": "No Hidden Claim Import Audit",
-  "active_obligation": "ERRC-008",
+  "phase": 8,
+  "phase_name": "Final Conditional Certificate",
+  "active_obligation": "NONE",
   "closed_obligations": [
     "ERRC-001",
     "ERRC-002",
@@ -11,7 +11,8 @@
     "ERRC-004",
     "ERRC-005",
     "ERRC-006",
-    "ERRC-007"
+    "ERRC-007",
+    "ERRC-008"
   ],
   "upstream_frozen_through_paper15": true,
   "paper15_frozen_commit": "b0fbcea9d936393586367e1ea9fb2586b4b4f7e3",
@@ -25,7 +26,8 @@
     "errc005_paper15_protocol_compatibility_closed": true,
     "errc006_stability_auditability_closed": true,
     "errc007_no_hidden_promotion_validation_acceptance_audit_closed": true,
-    "external_review_reproduction_certificates_theorem_closed": false,
+    "errc008_final_conditional_certificate_closed": true,
+    "external_review_reproduction_certificates_theorem_closed": true,
     "certificate_recovery_claim": false,
     "review_acceptance_claim": false,
     "reproduction_success_claim": false,
@@ -48,5 +50,5 @@
     "physical_nature_claim": false,
     "unified_field_theory_claim": false
   },
-  "next_move": "ERRC-008: assemble the final conditional external review and reproduction certificates theorem without changing any claim-boundary false flags."
+  "next_move": "Create the self-contained Paper 16 manuscript from the closed conditional theorem while preserving all non-promotion and no-success boundaries."
 }

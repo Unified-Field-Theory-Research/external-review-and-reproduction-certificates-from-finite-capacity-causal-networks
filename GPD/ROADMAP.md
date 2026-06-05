@@ -18,15 +18,17 @@
   reproduction-success, benchmark-success, prediction-success,
   falsification-success, simulation-only, fit-only, physical-nature, or
   unified-field import audit.
+- `ERRC-008`: Final conditional external review and reproduction certificates
+  theorem.
 
 ## Active
 
-- `ERRC-008`: Assemble the final conditional external review and reproduction
-  certificates theorem without changing any claim-boundary false flags.
+No active proof obligations remain. The Paper 16 theorem is closed
+conditionally and non-promotingly.
 
 ## Planned
 
-No planned rungs remain after `ERRC-008`.
+No planned rungs remain.
 
 All planned rungs remain conditional and non-promoting unless explicitly
 closed by formal and Rust guards.

@@ -39,7 +39,7 @@ This repo is intentionally separate from the upstream theorem repositories:
 - Paper 15 prediction and falsification protocols repo: `https://github.com/Unified-Field-Theory-Research/prediction-and-falsification-protocols-from-finite-capacity-causal-networks`
 - Upstream binding file: `UPSTREAM-PAPERS.json`
 
-The current theorem package is open and non-promoting. `ERRC-001` records the
+The current theorem package is closed conditionally and non-promoting. `ERRC-001` records the
 upstream binding and claim boundary through the closed Paper 15 result.
 `ERRC-002` defines finite external review and reproduction certificate records
 as bounded, auditable, non-promoting interface rows. `ERRC-003` defines finite
@@ -47,9 +47,8 @@ reviewer, protocol, and provenance descriptors. `ERRC-004` defines finite
 reproduction artifact, environment, and hash descriptors. `ERRC-005` defines
 the Paper 15 protocol compatibility reference relation. `ERRC-006` defines
 certificate stability, auditability, and re-checkability behavior. `ERRC-007`
-defines the no-hidden-claim import audit. `ERRC-008` is the active next
-obligation: assemble the final conditional external review and reproduction
-certificates theorem.
+defines the no-hidden-claim import audit. `ERRC-008` closes the final
+conditional external review and reproduction certificates theorem.
 
 This does not prove certificate recovery, review acceptance, reproduction
 success, protocol recovery, benchmark success, prediction success,

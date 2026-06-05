@@ -25,12 +25,14 @@ reproduction success, physical validation, or unified-field promotion.
   as finite re-checkability only.
 - `ERRC-007`: No-hidden-promotion, validation, review-acceptance,
   reproduction-success, and adjacent success import audit.
+- `ERRC-008`: Final conditional external review and reproduction certificates
+  theorem.
 
 ## Active Rung
 
-- `ERRC-008`: Assemble the final conditional certificate.
+No active rung remains. The theorem is closed conditionally.
 
-Required boundary for `ERRC-008`:
+Final boundary:
 
 - all prior rungs closed
 - no certificate recovery claim
