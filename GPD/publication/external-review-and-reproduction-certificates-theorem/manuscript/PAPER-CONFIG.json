@@ -5,5 +5,7 @@
   "title": "External Review And Reproduction Certificates From Finite-Capacity Causal Networks",
   "active_obligation": "NONE",
   "closed_obligations": ["ERRC-001", "ERRC-002", "ERRC-003", "ERRC-004", "ERRC-005", "ERRC-006", "ERRC-007", "ERRC-008"],
-  "status": "conditional_theorem_closed_non_promoting"
+  "status": "conditional_theorem_closed_non_promoting",
+  "final_theorem": "paper16_errc008_final_conditional_certificate_closes_external_review_reproduction_certificates_theorem",
+  "theorem_closure_commit": "0ce2262"
 }

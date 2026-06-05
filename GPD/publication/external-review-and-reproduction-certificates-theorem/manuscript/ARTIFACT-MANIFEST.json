@@ -5,8 +5,12 @@
   "artifacts": [
     "external_review_reproduction_certificates_theorem.tex",
     "PAPER-CONFIG.json",
-    "reproducibility-manifest.json"
+    "reproducibility-manifest.json",
+    "../../../formal/FiniteCapacity/ExternalReviewReproductionCertificates.lean",
+    "../../../../rust/cclab_accel/src/lib.rs",
+    "../../../../rust/cclab_accel/tests/external_review_reproduction_certificates.rs"
   ],
+  "final_theorem": "paper16_errc008_final_conditional_certificate_closes_external_review_reproduction_certificates_theorem",
   "claim_boundary": {
     "certificate_recovery_claim": false,
     "review_acceptance_claim": false,

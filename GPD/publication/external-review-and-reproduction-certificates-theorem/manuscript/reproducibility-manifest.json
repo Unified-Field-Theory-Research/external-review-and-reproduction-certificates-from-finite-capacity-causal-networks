@@ -6,6 +6,8 @@
     "make lean-build"
   ],
   "formal_module": "FiniteCapacity.ExternalReviewReproductionCertificates",
+  "formal_endpoint": "paper16_errc008_final_conditional_certificate_closes_external_review_reproduction_certificates_theorem",
   "rust_test": "rust/cclab_accel/tests/external_review_reproduction_certificates.rs",
+  "rust_final_guard": "final_certificate_sets_all_rungs_closed_and_preserves_boundary",
   "non_promotion_boundary_required": true
 }
