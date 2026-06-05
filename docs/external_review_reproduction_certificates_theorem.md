@@ -18,19 +18,19 @@ reproduction success, physical validation, or unified-field promotion.
   Paper 15 final conditional certificate.
 - `ERRC-002`: Finite external review and reproduction certificate records.
 - `ERRC-003`: Finite reviewer, protocol, and provenance descriptors.
+- `ERRC-004`: Finite reproduction artifact, environment, and hash descriptors.
 
 ## Active Rung
 
-- `ERRC-004`: Define finite reproduction artifact, environment, and hash
-  descriptors.
+- `ERRC-005`: Define Paper 15 protocol compatibility without review acceptance
+  or reproduction success.
 
-Required boundary for `ERRC-004`:
+Required boundary for `ERRC-005`:
 
-- finite artifact labels
-- finite artifact hash labels
-- finite environment labels
-- finite environment hash labels
-- finite reproduction-status descriptors
+- frozen Paper 15 endpoint reference
+- frozen Paper 15 final certificate reference
+- finite Paper 15 protocol label reference
+- finite certificate-row compatibility relation
 - no certificate recovery claim
 - no review acceptance claim
 - no reproduction success claim
@@ -44,8 +44,6 @@ Required boundary for `ERRC-004`:
 
 ## Planned Rungs
 
-- `ERRC-005`: Paper 15 protocol compatibility without review acceptance or
-  reproduction success
 - `ERRC-006`: certificate stability, auditability, and reproducibility behavior
 - `ERRC-007`: no-hidden-promotion, validation, review-acceptance, or
   reproduction-success import audit

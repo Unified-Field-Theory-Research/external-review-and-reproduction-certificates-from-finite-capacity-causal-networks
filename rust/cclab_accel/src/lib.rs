@@ -25,6 +25,8 @@ pub const PAPER16_ERRC002_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc002-finite-records";
 pub const PAPER16_ERRC003_MARKER: &str =
     "paper16-external-review-reproduction-certificates-errc003-provenance-descriptors";
+pub const PAPER16_ERRC004_MARKER: &str =
+    "paper16-external-review-reproduction-certificates-errc004-artifact-environment-hashes";
 
 pub const CERTIFICATE_IDENTIFIER_MAX_BYTES: usize = 64;
 pub const REVIEWER_LABEL_MAX_BYTES: usize = 64;
@@ -32,7 +34,9 @@ pub const REVIEWER_ROLE_MAX_BYTES: usize = 48;
 pub const PROTOCOL_LABEL_MAX_BYTES: usize = 96;
 pub const PROTOCOL_SCOPE_MAX_BYTES: usize = 96;
 pub const ARTIFACT_LABEL_MAX_BYTES: usize = 96;
+pub const ARTIFACT_HASH_DESCRIPTOR_MAX_BYTES: usize = 71;
 pub const ENVIRONMENT_DESCRIPTOR_MAX_BYTES: usize = 160;
+pub const ENVIRONMENT_HASH_DESCRIPTOR_MAX_BYTES: usize = 71;
 pub const PAPER15_PROTOCOL_REFERENCE_MAX_BYTES: usize = 128;
 pub const PROVENANCE_SOURCE_MAX_BYTES: usize = 96;
 pub const PROVENANCE_TIMESTAMP_MAX_BYTES: usize = 32;
@@ -533,6 +537,104 @@ impl ERRC003ReviewerProtocolProvenance {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ERRC004ArtifactEnvironmentHashes {
+    pub artifact_label: BoundedCertificateText,
+    pub artifact_hash: BoundedCertificateText,
+    pub environment_descriptor: BoundedCertificateText,
+    pub environment_hash: BoundedCertificateText,
+    pub reproduction_status: ReproductionStatusDescriptor,
+    pub artifact_descriptor_is_audit_only: bool,
+    pub hash_descriptors_are_integrity_only: bool,
+    pub environment_descriptor_is_audit_only: bool,
+    pub no_review_acceptance_claim: bool,
+    pub no_reproduction_success_claim: bool,
+    pub no_benchmark_success_claim: bool,
+    pub no_prediction_success_claim: bool,
+    pub no_falsification_success_claim: bool,
+    pub no_physical_validation_claim: bool,
+    pub no_empirical_adequacy_claim: bool,
+    pub no_physical_promotion_claim: bool,
+    pub no_simulation_only_promotion: bool,
+    pub no_fit_only_calibration_claim: bool,
+    pub no_physical_nature_claim: bool,
+    pub no_unified_field_theory_claim: bool,
+    pub claim_boundary: Paper16ClaimBoundary,
+}
+
+impl ERRC004ArtifactEnvironmentHashes {
+    pub const fn canonical() -> Self {
+        Self {
+            artifact_label: BoundedCertificateText::new(
+                "finite-review-artifact-label",
+                ARTIFACT_LABEL_MAX_BYTES,
+            ),
+            artifact_hash: BoundedCertificateText::new(
+                "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+                ARTIFACT_HASH_DESCRIPTOR_MAX_BYTES,
+            ),
+            environment_descriptor: BoundedCertificateText::new(
+                "bounded-reproduction-environment-descriptor",
+                ENVIRONMENT_DESCRIPTOR_MAX_BYTES,
+            ),
+            environment_hash: BoundedCertificateText::new(
+                "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+                ENVIRONMENT_HASH_DESCRIPTOR_MAX_BYTES,
+            ),
+            reproduction_status: ReproductionStatusDescriptor::AttemptLoggedWithoutSuccessClaim,
+            artifact_descriptor_is_audit_only: true,
+            hash_descriptors_are_integrity_only: true,
+            environment_descriptor_is_audit_only: true,
+            no_review_acceptance_claim: true,
+            no_reproduction_success_claim: true,
+            no_benchmark_success_claim: true,
+            no_prediction_success_claim: true,
+            no_falsification_success_claim: true,
+            no_physical_validation_claim: true,
+            no_empirical_adequacy_claim: true,
+            no_physical_promotion_claim: true,
+            no_simulation_only_promotion: true,
+            no_fit_only_calibration_claim: true,
+            no_physical_nature_claim: true,
+            no_unified_field_theory_claim: true,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_errc004(&self) -> bool {
+        self.artifact_label.is_finite_bounded_label()
+            && self.artifact_label.max_bytes == ARTIFACT_LABEL_MAX_BYTES
+            && self.artifact_hash.is_finite_bounded_label()
+            && self.artifact_hash.max_bytes == ARTIFACT_HASH_DESCRIPTOR_MAX_BYTES
+            && is_sha256_descriptor(self.artifact_hash.value)
+            && self.environment_descriptor.is_finite_bounded_label()
+            && self.environment_descriptor.max_bytes == ENVIRONMENT_DESCRIPTOR_MAX_BYTES
+            && self.environment_hash.is_finite_bounded_label()
+            && self.environment_hash.max_bytes == ENVIRONMENT_HASH_DESCRIPTOR_MAX_BYTES
+            && is_sha256_descriptor(self.environment_hash.value)
+            && self.reproduction_status.is_finite_descriptor()
+            && self.reproduction_status.avoids_success_claim()
+            && self.artifact_descriptor_is_audit_only
+            && self.hash_descriptors_are_integrity_only
+            && self.environment_descriptor_is_audit_only
+            && self.no_review_acceptance_claim
+            && self.no_reproduction_success_claim
+            && self.no_benchmark_success_claim
+            && self.no_prediction_success_claim
+            && self.no_falsification_success_claim
+            && self.no_physical_validation_claim
+            && self.no_empirical_adequacy_claim
+            && self.no_physical_promotion_claim
+            && self.no_simulation_only_promotion
+            && self.no_fit_only_calibration_claim
+            && self.no_physical_nature_claim
+            && self.no_unified_field_theory_claim
+            && self
+                .claim_boundary
+                .all_physical_review_and_success_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper16SkeletonCertificate {
     pub errc001_upstream_binding_closed: bool,
     pub errc002_finite_certificate_record_closed: bool,
@@ -591,6 +693,24 @@ impl Paper16SkeletonCertificate {
         }
     }
 
+    pub fn from_errc004_artifacts(
+        record: &ERRC002CertificateRecord,
+        descriptors: &ERRC003ReviewerProtocolProvenance,
+        artifacts: &ERRC004ArtifactEnvironmentHashes,
+    ) -> Self {
+        Self {
+            errc001_upstream_binding_closed: ERRC001UpstreamBinding::canonical().closes_errc001(),
+            errc002_finite_certificate_record_closed: record.closes_errc002(),
+            errc003_reviewer_protocol_provenance_closed: descriptors.closes_errc003(),
+            errc004_reproduction_artifact_environment_closed: artifacts.closes_errc004(),
+            errc005_paper15_protocol_compatibility_closed: false,
+            errc006_stability_auditability_closed: false,
+            errc007_no_hidden_promotion_validation_acceptance_audit_closed: false,
+            errc008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper16ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper16_theorem(&self) -> bool {
         self.errc001_upstream_binding_closed
             && self.errc002_finite_certificate_record_closed
@@ -618,10 +738,20 @@ pub fn paper16_errc003_marker() -> &'static str {
     PAPER16_ERRC003_MARKER
 }
 
+pub fn paper16_errc004_marker() -> &'static str {
+    PAPER16_ERRC004_MARKER
+}
+
 pub fn is_sha1_hex(value: &str) -> bool {
     value.len() == 40 && value.bytes().all(|byte| byte.is_ascii_hexdigit())
 }
 
+pub fn is_sha256_descriptor(value: &str) -> bool {
+    value.strip_prefix("sha256:").is_some_and(|digest| {
+        digest.len() == 64 && digest.bytes().all(|byte| byte.is_ascii_hexdigit())
+    })
+}
+
 pub fn active_obligation() -> &'static str {
-    "ERRC-004"
+    "ERRC-005"
 }

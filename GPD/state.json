@@ -1,13 +1,14 @@
 {
   "schema_version": 1,
   "paper": 16,
-  "phase": 3,
-  "phase_name": "Reviewer Protocol Provenance Descriptors",
-  "active_obligation": "ERRC-004",
+  "phase": 4,
+  "phase_name": "Artifact Environment Hash Descriptors",
+  "active_obligation": "ERRC-005",
   "closed_obligations": [
     "ERRC-001",
     "ERRC-002",
-    "ERRC-003"
+    "ERRC-003",
+    "ERRC-004"
   ],
   "upstream_frozen_through_paper15": true,
   "paper15_frozen_commit": "b0fbcea9d936393586367e1ea9fb2586b4b4f7e3",
@@ -17,6 +18,7 @@
     "errc001_upstream_binding_closed": true,
     "errc002_finite_certificate_record_closed": true,
     "errc003_reviewer_protocol_provenance_closed": true,
+    "errc004_reproduction_artifact_environment_closed": true,
     "external_review_reproduction_certificates_theorem_closed": false,
     "certificate_recovery_claim": false,
     "review_acceptance_claim": false,
@@ -40,5 +42,5 @@
     "physical_nature_claim": false,
     "unified_field_theory_claim": false
   },
-  "next_move": "ERRC-004: define finite reproduction artifact, environment, and hash descriptors without claiming reproduction success, validation, benchmark success, or promotion."
+  "next_move": "ERRC-005: define Paper 15 protocol compatibility for certificate rows without claiming review acceptance, reproduction success, protocol recovery, prediction success, falsification success, or promotion."
 }

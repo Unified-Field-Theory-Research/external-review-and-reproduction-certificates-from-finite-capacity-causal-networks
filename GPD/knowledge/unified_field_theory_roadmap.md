@@ -24,7 +24,8 @@
 
 `ERRC-001` is closed as an upstream-binding scaffold. `ERRC-002` is closed as
 a finite certificate-record interface. `ERRC-003` is closed as reviewer,
-protocol, and provenance descriptors. `ERRC-004` is active.
+protocol, and provenance descriptors. `ERRC-004` is closed as artifact,
+environment, and hash descriptors. `ERRC-005` is active.
 
 ## Downstream Roadmap
 

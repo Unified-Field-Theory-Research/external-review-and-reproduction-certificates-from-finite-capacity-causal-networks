@@ -12,4 +12,6 @@
   certificate records as bounded, auditable, non-promoting interface rows.
 - Closed `ERRC-003` by defining finite reviewer, protocol, and provenance
   descriptors as bounded, auditable, non-promoting interface components.
-- Recorded `ERRC-004` as the active next obligation.
+- Closed `ERRC-004` by defining finite reproduction artifact, environment, and
+  hash descriptors as audit-only, non-promoting interface components.
+- Recorded `ERRC-005` as the active next obligation.

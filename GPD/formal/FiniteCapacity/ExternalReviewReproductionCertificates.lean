@@ -366,6 +366,106 @@ theorem errc003_canonical_reviewer_protocol_provenance_closed :
   simp
 
 /--
+`ERRC-004` binds reproduction artifacts and environments to finite labels and
+hash descriptors. Hashes are audit/integrity descriptors only and do not state
+that reproduction succeeded or that physical validation occurred.
+-/
+structure ERRC004ArtifactEnvironmentHashContract where
+  finiteArtifactDescriptor : Prop
+  finiteArtifactHashDescriptor : Prop
+  finiteEnvironmentDescriptor : Prop
+  finiteEnvironmentHashDescriptor : Prop
+  finiteReproductionStatusDescriptor : Prop
+  boundedArtifactDescriptor : Prop
+  boundedArtifactHashDescriptor : Prop
+  boundedEnvironmentDescriptor : Prop
+  boundedEnvironmentHashDescriptor : Prop
+  boundedReproductionStatusDescriptor : Prop
+  artifactDescriptorIsAuditOnly : Prop
+  hashDescriptorIsIntegrityOnly : Prop
+  environmentDescriptorIsAuditOnly : Prop
+  reproductionStatusAvoidsSuccessClaim : Prop
+  noReviewAcceptanceClaim : Prop
+  noReproductionSuccessClaim : Prop
+  noBenchmarkSuccessClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noSimulationOnlyPromotionClaim : Prop
+  noFitOnlyCalibrationClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def ERRC004ArtifactEnvironmentHashContract.closed
+    (c : ERRC004ArtifactEnvironmentHashContract) : Prop :=
+  c.finiteArtifactDescriptor ∧
+  c.finiteArtifactHashDescriptor ∧
+  c.finiteEnvironmentDescriptor ∧
+  c.finiteEnvironmentHashDescriptor ∧
+  c.finiteReproductionStatusDescriptor ∧
+  c.boundedArtifactDescriptor ∧
+  c.boundedArtifactHashDescriptor ∧
+  c.boundedEnvironmentDescriptor ∧
+  c.boundedEnvironmentHashDescriptor ∧
+  c.boundedReproductionStatusDescriptor ∧
+  c.artifactDescriptorIsAuditOnly ∧
+  c.hashDescriptorIsIntegrityOnly ∧
+  c.environmentDescriptorIsAuditOnly ∧
+  c.reproductionStatusAvoidsSuccessClaim ∧
+  c.noReviewAcceptanceClaim ∧
+  c.noReproductionSuccessClaim ∧
+  c.noBenchmarkSuccessClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noSimulationOnlyPromotionClaim ∧
+  c.noFitOnlyCalibrationClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+def errc004CanonicalArtifactEnvironmentHashContract :
+    ERRC004ArtifactEnvironmentHashContract :=
+  {
+    finiteArtifactDescriptor := True,
+    finiteArtifactHashDescriptor := True,
+    finiteEnvironmentDescriptor := True,
+    finiteEnvironmentHashDescriptor := True,
+    finiteReproductionStatusDescriptor := True,
+    boundedArtifactDescriptor := True,
+    boundedArtifactHashDescriptor := True,
+    boundedEnvironmentDescriptor := True,
+    boundedEnvironmentHashDescriptor := True,
+    boundedReproductionStatusDescriptor := True,
+    artifactDescriptorIsAuditOnly := True,
+    hashDescriptorIsIntegrityOnly := True,
+    environmentDescriptorIsAuditOnly := True,
+    reproductionStatusAvoidsSuccessClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalPromotionClaim := True,
+    noSimulationOnlyPromotionClaim := True,
+    noFitOnlyCalibrationClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem errc004_canonical_artifact_environment_hash_closed :
+    ERRC004ArtifactEnvironmentHashContract.closed
+      errc004CanonicalArtifactEnvironmentHashContract := by
+  unfold ERRC004ArtifactEnvironmentHashContract.closed
+  unfold errc004CanonicalArtifactEnvironmentHashContract
+  simp
+
+/--
 The full Paper 16 theorem stays closed only after a future final conditional
 certificate. `ERRC-001` intentionally leaves that field false.
 -/
@@ -530,6 +630,54 @@ theorem paper16_errc003_stage_does_not_close_external_review_reproduction_certif
   unfold errc002CanonicalFiniteCertificateRecordContract
   unfold ERRC003ReviewerProtocolProvenanceContract.closed
   unfold errc003CanonicalReviewerProtocolProvenanceContract
+  simp
+
+def paper16ERRC004ArtifactEnvironmentHashContract :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract :=
+  {
+    errc001UpstreamBindingClosed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002FiniteCertificateRecordClosed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003ReviewerProtocolProvenanceClosed :=
+      ERRC003ReviewerProtocolProvenanceContract.closed
+        errc003CanonicalReviewerProtocolProvenanceContract,
+    errc004ReproductionArtifactEnvironmentClosed :=
+      ERRC004ArtifactEnvironmentHashContract.closed
+        errc004CanonicalArtifactEnvironmentHashContract,
+    errc005Paper15ProtocolCompatibilityClosed := False,
+    errc006StabilityAuditabilityClosed := False,
+    errc007NoHiddenPromotionValidationAcceptanceAuditClosed := False,
+    errc008FinalConditionalCertificateClosed := False,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem paper16_errc004_stage_does_not_close_external_review_reproduction_certificates_theorem :
+    ¬ Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+      paper16ERRC004ArtifactEnvironmentHashContract := by
+  unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+  unfold paper16ERRC004ArtifactEnvironmentHashContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
+  unfold ERRC004ArtifactEnvironmentHashContract.closed
+  unfold errc004CanonicalArtifactEnvironmentHashContract
   simp
 
 end FiniteCapacity

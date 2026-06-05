@@ -43,9 +43,10 @@ The current theorem package is open and non-promoting. `ERRC-001` records the
 upstream binding and claim boundary through the closed Paper 15 result.
 `ERRC-002` defines finite external review and reproduction certificate records
 as bounded, auditable, non-promoting interface rows. `ERRC-003` defines finite
-reviewer, protocol, and provenance descriptors. `ERRC-004` is the active next
-obligation: define finite reproduction artifact, environment, and hash
-descriptors.
+reviewer, protocol, and provenance descriptors. `ERRC-004` defines finite
+reproduction artifact, environment, and hash descriptors. `ERRC-005` is the
+active next obligation: define Paper 15 protocol compatibility as a bounded,
+auditable, non-promoting reference relation.
 
 This does not prove certificate recovery, review acceptance, reproduction
 success, protocol recovery, benchmark success, prediction success,

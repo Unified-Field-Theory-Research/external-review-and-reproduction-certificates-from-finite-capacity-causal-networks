@@ -7,11 +7,12 @@ The repository begins with `ERRC-001` closed: upstream binding and
 claim-boundary preservation through the frozen Paper 15 prediction and
 falsification protocols certificate. `ERRC-002` is also closed as a finite
 external review and reproduction certificate record interface. `ERRC-003` is
-closed as finite reviewer, protocol, and provenance descriptors.
+closed as finite reviewer, protocol, and provenance descriptors. `ERRC-004` is
+closed as finite reproduction artifact, environment, and hash descriptors.
 
-The local theorem is not closed. The active next obligation is `ERRC-004`:
-define finite reproduction artifact, environment, and hash descriptors as
-bounded, auditable, non-promoting interface components.
+The local theorem is not closed. The active next obligation is `ERRC-005`:
+define Paper 15 protocol compatibility as a bounded, auditable, non-promoting
+reference relation.
 
 ## Claim Boundary
 

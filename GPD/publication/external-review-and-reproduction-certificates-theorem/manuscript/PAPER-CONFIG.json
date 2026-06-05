@@ -3,7 +3,7 @@
   "paper": 16,
   "slug": "external-review-and-reproduction-certificates-theorem",
   "title": "External Review And Reproduction Certificates From Finite-Capacity Causal Networks",
-  "active_obligation": "ERRC-004",
-  "closed_obligations": ["ERRC-001", "ERRC-002", "ERRC-003"],
-  "status": "open_non_promoting_errc003_closed"
+  "active_obligation": "ERRC-005",
+  "closed_obligations": ["ERRC-001", "ERRC-002", "ERRC-003", "ERRC-004"],
+  "status": "open_non_promoting_errc004_closed"
 }
