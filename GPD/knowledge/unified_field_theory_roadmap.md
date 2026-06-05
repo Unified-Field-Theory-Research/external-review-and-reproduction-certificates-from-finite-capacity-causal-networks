@@ -23,7 +23,8 @@
 16. Paper 16: external review and reproduction certificates.
 
 `ERRC-001` is closed as an upstream-binding scaffold. `ERRC-002` is closed as
-a finite certificate-record interface. `ERRC-003` is active.
+a finite certificate-record interface. `ERRC-003` is closed as reviewer,
+protocol, and provenance descriptors. `ERRC-004` is active.
 
 ## Downstream Roadmap
 

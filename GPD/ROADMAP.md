@@ -7,18 +7,17 @@
   certificate.
 - `ERRC-002`: Finite external review and reproduction certificate records as
   bounded, auditable, non-promoting interface rows.
+- `ERRC-003`: Finite reviewer, protocol, and provenance descriptors.
 
 ## Active
 
-- `ERRC-003`: Define finite reviewer, protocol, and provenance descriptors
-  without importing review acceptance, reproduction success, physical
-  validation, empirical adequacy, physical promotion, simulation-only
+- `ERRC-004`: Define finite reproduction artifact, environment, and hash
+  descriptors without claiming reproduction success, physical validation,
+  empirical adequacy, benchmark success, physical promotion, simulation-only
   promotion, or fit-only calibration.
 
 ## Planned
 
-- `ERRC-004`: Define finite reproduction artifact, environment, and hash
-  descriptors.
 - `ERRC-005`: Define compatibility with Paper 15 protocol rows without
   claiming review acceptance or reproduction success.
 - `ERRC-006`: Define certificate stability, auditability, and reproducibility

@@ -10,4 +10,6 @@
   close the external review and reproduction certificates theorem.
 - Closed `ERRC-002` by defining finite external review and reproduction
   certificate records as bounded, auditable, non-promoting interface rows.
-- Recorded `ERRC-003` as the active next obligation.
+- Closed `ERRC-003` by defining finite reviewer, protocol, and provenance
+  descriptors as bounded, auditable, non-promoting interface components.
+- Recorded `ERRC-004` as the active next obligation.

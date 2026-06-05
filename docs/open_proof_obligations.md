@@ -2,24 +2,23 @@
 
 ## Active
 
-### ERRC-003
+### ERRC-004
 
-Define finite reviewer, protocol, and provenance descriptors for the
+Define finite reproduction artifact, environment, and hash descriptors for
 certificate rows as bounded, auditable, non-promoting interface components.
 
 Acceptance criteria:
 
-- reviewer labels are finite descriptors, not review acceptance evidence
-- protocol labels are finite descriptors, not protocol recovery claims
-- provenance labels are finite descriptors with bounded source, timestamp, and
-  custodian fields
-- every descriptor keeps review acceptance, reproduction success, validation,
-  empirical adequacy, physical promotion, and unified-field claims false
-- Rust guards reject unbounded reviewer, protocol, and provenance descriptors
-- Lean scaffold records that `ERRC-003` is required before the full Paper 16
+- artifact labels are finite descriptors, not evidence of reproduced results
+- environment labels are finite descriptors, not physical validation claims
+- hash labels are finite bounded descriptors for audit binding only
+- reproduction status remains non-success and non-promoting
+- Rust guards reject unbounded artifact, environment, and hash descriptors
+- Lean scaffold records that `ERRC-004` is required before the full Paper 16
   theorem can close
 
 ## Closed
 
 - `ERRC-001`: Upstream binding and claim-boundary scaffold.
 - `ERRC-002`: Finite external review and reproduction certificate records.
+- `ERRC-003`: Finite reviewer, protocol, and provenance descriptors.

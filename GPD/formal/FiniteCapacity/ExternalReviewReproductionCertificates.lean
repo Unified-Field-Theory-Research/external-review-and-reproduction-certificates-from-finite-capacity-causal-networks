@@ -262,6 +262,110 @@ theorem errc002_canonical_finite_certificate_record_closed :
   simp
 
 /--
+`ERRC-003` refines certificate row participants into finite reviewer,
+protocol, and provenance descriptors. These descriptors are label and audit
+metadata only; they do not assert review acceptance, protocol recovery, or
+successful reproduction.
+-/
+structure ERRC003ReviewerProtocolProvenanceContract where
+  finiteReviewerDescriptor : Prop
+  finiteReviewerRoleDescriptor : Prop
+  finiteProtocolDescriptor : Prop
+  finiteProtocolScopeDescriptor : Prop
+  finiteProvenanceSourceDescriptor : Prop
+  finiteProvenanceTimestampDescriptor : Prop
+  finiteProvenanceCustodianDescriptor : Prop
+  boundedReviewerDescriptor : Prop
+  boundedReviewerRoleDescriptor : Prop
+  boundedProtocolDescriptor : Prop
+  boundedProtocolScopeDescriptor : Prop
+  boundedProvenanceSourceDescriptor : Prop
+  boundedProvenanceTimestampDescriptor : Prop
+  boundedProvenanceCustodianDescriptor : Prop
+  reviewerDescriptorIsLabelOnly : Prop
+  protocolDescriptorIsLabelOnly : Prop
+  provenanceDescriptorIsAuditOnly : Prop
+  noReviewAcceptanceClaim : Prop
+  noReproductionSuccessClaim : Prop
+  noProtocolRecoveryClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noSimulationOnlyPromotionClaim : Prop
+  noFitOnlyCalibrationClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def ERRC003ReviewerProtocolProvenanceContract.closed
+    (c : ERRC003ReviewerProtocolProvenanceContract) : Prop :=
+  c.finiteReviewerDescriptor ∧
+  c.finiteReviewerRoleDescriptor ∧
+  c.finiteProtocolDescriptor ∧
+  c.finiteProtocolScopeDescriptor ∧
+  c.finiteProvenanceSourceDescriptor ∧
+  c.finiteProvenanceTimestampDescriptor ∧
+  c.finiteProvenanceCustodianDescriptor ∧
+  c.boundedReviewerDescriptor ∧
+  c.boundedReviewerRoleDescriptor ∧
+  c.boundedProtocolDescriptor ∧
+  c.boundedProtocolScopeDescriptor ∧
+  c.boundedProvenanceSourceDescriptor ∧
+  c.boundedProvenanceTimestampDescriptor ∧
+  c.boundedProvenanceCustodianDescriptor ∧
+  c.reviewerDescriptorIsLabelOnly ∧
+  c.protocolDescriptorIsLabelOnly ∧
+  c.provenanceDescriptorIsAuditOnly ∧
+  c.noReviewAcceptanceClaim ∧
+  c.noReproductionSuccessClaim ∧
+  c.noProtocolRecoveryClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noSimulationOnlyPromotionClaim ∧
+  c.noFitOnlyCalibrationClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+def errc003CanonicalReviewerProtocolProvenanceContract :
+    ERRC003ReviewerProtocolProvenanceContract :=
+  {
+    finiteReviewerDescriptor := True,
+    finiteReviewerRoleDescriptor := True,
+    finiteProtocolDescriptor := True,
+    finiteProtocolScopeDescriptor := True,
+    finiteProvenanceSourceDescriptor := True,
+    finiteProvenanceTimestampDescriptor := True,
+    finiteProvenanceCustodianDescriptor := True,
+    boundedReviewerDescriptor := True,
+    boundedReviewerRoleDescriptor := True,
+    boundedProtocolDescriptor := True,
+    boundedProtocolScopeDescriptor := True,
+    boundedProvenanceSourceDescriptor := True,
+    boundedProvenanceTimestampDescriptor := True,
+    boundedProvenanceCustodianDescriptor := True,
+    reviewerDescriptorIsLabelOnly := True,
+    protocolDescriptorIsLabelOnly := True,
+    provenanceDescriptorIsAuditOnly := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalPromotionClaim := True,
+    noSimulationOnlyPromotionClaim := True,
+    noFitOnlyCalibrationClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem errc003_canonical_reviewer_protocol_provenance_closed :
+    ERRC003ReviewerProtocolProvenanceContract.closed
+      errc003CanonicalReviewerProtocolProvenanceContract := by
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
+  simp
+
+/--
 The full Paper 16 theorem stays closed only after a future final conditional
 certificate. `ERRC-001` intentionally leaves that field false.
 -/
@@ -382,6 +486,50 @@ theorem paper16_errc002_stage_does_not_close_external_review_reproduction_certif
   unfold errc001CanonicalUpstreamBindingContract
   unfold ERRC002FiniteCertificateRecordContract.closed
   unfold errc002CanonicalFiniteCertificateRecordContract
+  simp
+
+def paper16ERRC003ReviewerProtocolProvenanceContract :
+    Paper16ExternalReviewReproductionCertificatesTheoremContract :=
+  {
+    errc001UpstreamBindingClosed :=
+      ERRC001UpstreamBindingContract.closed
+        errc001CanonicalUpstreamBindingContract,
+    errc002FiniteCertificateRecordClosed :=
+      ERRC002FiniteCertificateRecordContract.closed
+        errc002CanonicalFiniteCertificateRecordContract,
+    errc003ReviewerProtocolProvenanceClosed :=
+      ERRC003ReviewerProtocolProvenanceContract.closed
+        errc003CanonicalReviewerProtocolProvenanceContract,
+    errc004ReproductionArtifactEnvironmentClosed := False,
+    errc005Paper15ProtocolCompatibilityClosed := False,
+    errc006StabilityAuditabilityClosed := False,
+    errc007NoHiddenPromotionValidationAcceptanceAuditClosed := False,
+    errc008FinalConditionalCertificateClosed := False,
+    noCertificateRecoveryClaim := True,
+    noReviewAcceptanceClaim := True,
+    noReproductionSuccessClaim := True,
+    noProtocolRecoveryClaim := True,
+    noBenchmarkSuccessClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem paper16_errc003_stage_does_not_close_external_review_reproduction_certificates_theorem :
+    ¬ Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+      paper16ERRC003ReviewerProtocolProvenanceContract := by
+  unfold Paper16ExternalReviewReproductionCertificatesTheoremContract.closed
+  unfold paper16ERRC003ReviewerProtocolProvenanceContract
+  unfold ERRC001UpstreamBindingContract.closed
+  unfold errc001CanonicalUpstreamBindingContract
+  unfold ERRC002FiniteCertificateRecordContract.closed
+  unfold errc002CanonicalFiniteCertificateRecordContract
+  unfold ERRC003ReviewerProtocolProvenanceContract.closed
+  unfold errc003CanonicalReviewerProtocolProvenanceContract
   simp
 
 end FiniteCapacity
