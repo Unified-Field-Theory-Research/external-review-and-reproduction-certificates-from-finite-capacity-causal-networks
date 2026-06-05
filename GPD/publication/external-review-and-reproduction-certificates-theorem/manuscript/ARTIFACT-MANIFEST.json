@@ -4,6 +4,7 @@
   "title": "External Review And Reproduction Certificates From Finite-Capacity Causal Networks",
   "artifacts": [
     "external_review_reproduction_certificates_theorem.tex",
+    "external_review_reproduction_certificates_theorem.pdf",
     "PAPER-CONFIG.json",
     "reproducibility-manifest.json",
     "../../../formal/FiniteCapacity/ExternalReviewReproductionCertificates.lean",
